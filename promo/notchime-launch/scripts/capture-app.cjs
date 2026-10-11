@@ -1,0 +1,10 @@
+const fs=require('node:fs'),path=require('node:path'),{spawn}=require('node:child_process');
+const root=path.resolve(__dirname,'../../..');
+const profileRoot=path.join(root,'.cache/tests');fs.mkdirSync(profileRoot,{recursive:true});
+const profile=fs.mkdtempSync(path.join(profileRoot,'promo-'));
+const tmp=path.join(profile,'tmp');fs.mkdirSync(tmp);
+const env={...process.env,TZ:'Asia/Seoul',TMPDIR:tmp,CALENDAR_TEST_NODE:process.execPath,NODE_OPTIONS:'--require="'+path.join(__dirname,'capture-bootstrap.cjs')+'"'};delete env.ELECTRON_RUN_AS_NODE;
+const child=spawn('npm',['--ignore-scripts','start','--','--user-data-dir='+profile,'--use-mock-keychain'],{cwd:root,env,detached:true,stdio:['ignore','pipe','pipe']});
+let log='';for(const pipe of [child.stdout,child.stderr])pipe.on('data',x=>{log+=x;process.stdout.write(x);});
+const timer=setTimeout(()=>{try{process.kill(-child.pid,'SIGTERM');}catch{}},70000);
+child.on('exit',code=>{clearTimeout(timer);fs.writeFileSync(path.join(__dirname,'../assets/captures/capture.log'),log);fs.rmSync(profile,{recursive:true,force:true,maxRetries:10,retryDelay:100});process.exitCode=code||(!log.includes('PROMO_CAPTURE_OK')?1:0);});

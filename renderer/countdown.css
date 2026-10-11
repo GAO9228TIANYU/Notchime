@@ -1,0 +1,89 @@
+/* Scroll content; never change the native window or the original island motion. */
+.calendar-page { overflow: auto; padding-right: 4px; gap: var(--s-3); }
+.calendar-page > .calendar-grid { flex: 1 0 280px; min-height: 280px; gap: var(--s-3); }
+.calendar-page .calendar-grid > .tile { padding: 14px; }
+.calendar-page .calendar-event-list { margin-top: 12px; }
+.calendar-page .calendar-event { padding: 10px; margin-bottom: 8px; }
+.calendar-page .calendar-next .calendar-event { margin-top: 8px; padding: 8px; }
+.calendar-page .calendar-next h2 { margin-top: 0; }
+.calendar-page .calendar-next .calendar-event > div { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; }
+.calendar-page .calendar-next .calendar-event-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0; }
+.calendar-page .calendar-next .calendar-event-time { white-space: nowrap; }
+.calendar-page .calendar-next .calendar-color { min-height: 24px; }
+.calendar-page .calendar-week-list { margin-top: 8px; }
+.calendar-page .calendar-day { grid-template-columns: 64px minmax(0, 1fr); gap: 8px; padding: 3px 0; }
+.calendar-page .calendar-day-label { padding-top: 0; align-self: center; }
+.calendar-page .calendar-day .calendar-event { padding: 0; margin: 0; }
+.calendar-page .calendar-day .calendar-color { min-height: 16px; }
+.calendar-page .calendar-day .calendar-event > div { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
+.calendar-page .calendar-day .calendar-event-title { min-width: 0; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 0; }
+.calendar-page .calendar-day .calendar-event-time { flex-shrink: 0; white-space: nowrap; }
+.calendar-page .calendar-day .calendar-event-calendar { display: none; }
+.countdown-section { flex-shrink: 0; position: relative; }
+.countdown-heading-hint { font-weight: 400; font-size: var(--fs-small); color: var(--text-3); margin-left: 8px; }
+.countdown-status { color: var(--text-2); font-size: var(--fs-ui); margin: 8px 0; min-height: 16px; }
+.countdown-status:empty { display: none; }
+.countdown-status[data-kind='success'] { position: absolute; right: 90px; top: 8px; margin: 0; font-size: var(--fs-small); }
+.countdown-empty { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; margin-top: 8px; background: var(--surface-1); border: 1px dashed var(--hairline); border-radius: var(--r-tile); }
+.countdown-empty > p:first-child { margin: 0; font-size: var(--fs-body); }
+.countdown-empty .calendar-button { flex-shrink: 0; }
+.countdown-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-3); margin-top: 8px; }
+.countdown-list:empty { display: none; }
+.countdown-card { padding: 12px; border: 1px solid var(--hairline-soft); border-top: 2px solid var(--countdown-color); border-radius: var(--r-tile); background: var(--surface-1); transition: background var(--d-fast) var(--ease), border-color var(--d-fast) var(--ease); min-width: 0; }
+.countdown-card:hover { background: var(--surface-2); }
+.countdown-card-header { display: flex; gap: 8px; align-items: flex-start; justify-content: space-between; }
+.countdown-card h3 { margin: 0; font-size: var(--fs-body); line-height: 1.5; overflow-wrap: anywhere; }
+.countdown-pinned-badge { color: var(--countdown-color); font-size: var(--fs-small); white-space: nowrap; }
+.countdown-value { font-size: 22px; letter-spacing: -.5px; margin: 8px 0 4px; font-weight: 550; font-variant-numeric: tabular-nums; }
+.countdown-value[data-status='past'], .countdown-value[data-status='unavailable'] { color: var(--text-2); }
+.countdown-target { margin: 0; font-size: var(--fs-small); color: var(--text-3); font-variant-numeric: tabular-nums; }
+.countdown-card-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.countdown-card-actions button { font-size: var(--fs-small); border: none; border-radius: var(--r-pill); padding: 4px 7px; background: var(--surface-2); color: var(--text-2); cursor: pointer; }
+.countdown-card-actions button:hover { color: var(--text-1); background: var(--surface-3); }
+.countdown-view-all { margin-top: 12px; }
+.countdown-dialog { width: min(460px, calc(100vw - 32px)); max-height: calc(100vh - 32px); overflow: auto; padding: 24px; color: var(--text-1); background: var(--surface-1); border: 1px solid var(--hairline); border-radius: var(--r-tile); font-family: var(--font); box-shadow: 0 12px 40px var(--panel-shadow); }
+.countdown-dialog::backdrop { background: rgba(0, 0, 0, .65); }
+.countdown-dialog h2 { margin: 0; font-size: var(--fs-heading-2); }
+.countdown-dialog label { display: block; margin-top: 14px; color: var(--text-2); font-size: var(--fs-ui); }
+.countdown-dialog input:not([type='checkbox']), .countdown-dialog select { display: block; width: 100%; padding: 10px; margin-top: 6px; color: var(--text-1); background: var(--surface-2); border: 1px solid var(--hairline); border-radius: var(--r-input); font: inherit; color-scheme: dark; }
+.countdown-dialog input:focus-visible, .countdown-dialog select:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+.countdown-dialog .countdown-pin-field { display: flex; gap: 8px; align-items: center; }
+.countdown-pin-field input { accent-color: var(--accent-blue); }
+.countdown-form-dates { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.countdown-picker-field { position: relative; }
+.countdown-dialog .countdown-picker-field input { padding-right: 40px; }
+.countdown-picker-field input::-webkit-calendar-picker-indicator { display: none; }
+.countdown-picker-field > button { position: absolute; right: 4px; top: 4px; bottom: 4px; width: 32px; border: 0; border-radius: var(--r-input); background: transparent; color: var(--text-2); cursor: pointer; }
+.countdown-picker-field > button:hover { background: var(--surface-3); color: var(--text-1); }
+.countdown-picker-field svg { width: 18px; height: 18px; vertical-align: middle; }
+.countdown-picker-dialog { width: min(380px, calc(100vw - 32px)); padding: 20px; background: linear-gradient(var(--surface-1), var(--surface-1)), var(--bg-base); }
+.countdown-picker-dialog::backdrop { background: rgba(0, 0, 0, .35); }
+.countdown-month-controls { display: flex; gap: 8px; align-items: flex-end; }
+.countdown-month-controls label { margin-top: 12px; flex: 1; min-width: 0; }
+.countdown-month-controls > button { padding: 8px 10px; }
+.countdown-dialog .countdown-month-controls input, .countdown-dialog .countdown-month-controls select { padding: 8px; }
+.countdown-weekdays, .countdown-date-row { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 3px; }
+.countdown-weekdays { margin: 12px 0 6px; color: var(--text-3); font-size: var(--fs-small); text-align: center; }
+.countdown-date-row { margin-bottom: 3px; }
+.countdown-date-row > button, .countdown-date-row > span { height: 30px; min-width: 0; }
+.countdown-date-row > button { border: 1px solid transparent; border-radius: var(--r-input); background: transparent; color: var(--text-1); font: inherit; font-size: var(--fs-ui); cursor: pointer; }
+.countdown-date-row > button:hover { background: var(--surface-3); }
+.countdown-date-row > button[aria-current='date'] { border-color: var(--accent-blue); }
+.countdown-date-row > button[aria-selected='true'] { background: var(--accent-blue); }
+.countdown-picker-dialog .countdown-dialog-actions { margin-top: 12px; }
+.countdown-picker-dialog .countdown-error:empty { display: none; }
+.countdown-time-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.countdown-dialog .countdown-time-options select { height: 180px; padding: 4px; }
+.countdown-time-options option { padding: 5px 10px; border-radius: 6px; }
+.countdown-time-shortcuts { display: flex; gap: 8px; margin-top: 12px; }
+.countdown-error { color: var(--p0); font-size: var(--fs-ui); line-height: 1.5; min-height: 18px; margin: 12px 0; }
+.countdown-dialog-actions { display: flex; justify-content: flex-end; gap: 10px; }
+.countdown-primary { color: var(--text-1); border-color: var(--accent-blue); }
+.countdown-danger { color: var(--p0); }
+.countdown-dialog button:disabled, .countdown-card-actions button:disabled { opacity: .5; cursor: wait; }
+.calendar-page::-webkit-scrollbar, .countdown-dialog::-webkit-scrollbar { width: var(--scrollbar-w); }
+.calendar-page::-webkit-scrollbar-track, .countdown-dialog::-webkit-scrollbar-track { background: transparent; }
+.calendar-page::-webkit-scrollbar-thumb, .countdown-dialog::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: var(--r-pill); }
+@media (max-width: 950px) { .countdown-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 800px) { .calendar-page > .calendar-grid { flex: none; } .calendar-page .calendar-day .calendar-event > div, .calendar-page .calendar-next .calendar-event > div { display: block; } }
+@media (max-width: 600px) { .countdown-list, .countdown-form-dates { grid-template-columns: minmax(0, 1fr); } .countdown-empty { flex-direction: column; align-items: flex-start; } }

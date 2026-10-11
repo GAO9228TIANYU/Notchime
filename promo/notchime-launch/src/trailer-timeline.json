@@ -1,0 +1,27 @@
+{
+  "width": 1920, "height": 1080, "fps": 60, "duration": 9.6,
+  "music": "music/beat-map.json",
+  "cuts": [
+    {"start":0.0,"end":1.2,"scene":"hook","transition":"notch mask reveal at 0.4","en":"Meet Notchime.","zh":"遇见 Notchime。"},
+    {"start":1.2,"end":2.0,"scene":"iphone-calendar","transition":"spatial push","en":"Plan on iPhone.","zh":"在 iPhone 安排日程。"},
+    {"start":2.0,"end":2.8,"scene":"mac-calendar","transition":"calendar match cut / whip","en":"See it on Mac.","zh":"在 Mac 随时查看。"},
+    {"start":2.8,"end":3.6,"scene":"mac-reminders","transition":"speed ramp; click at 3.2","en":"Done here. Synced there.","zh":"这里完成，多端同步。"},
+    {"start":3.6,"end":4.2,"scene":"iphone-completed","transition":"bass-hit push; same task","en":"Done here. Synced there.","zh":"这里完成，多端同步。"},
+    {"start":4.2,"end":5.4,"scene":"countdown","transition":"number match cut / focus ramp","en":"Every moment matters.","zh":"重要时刻，不再错过。"},
+    {"start":5.4,"end":6.8,"scene":"smart-notch","transition":"collapse → pause → reveal at 6.0","en":"Only when needed.","zh":"需要时，才出现。"},
+    {"start":6.8,"end":8.0,"scene":"privacy","transition":"lock match / three pulse accents","en":"Local-first. Privacy-first.","zh":"本地优先，隐私优先。"},
+    {"start":8.0,"end":9.6,"scene":"brand","transition":"logo impact / sonic signature","en":"There When You Need It. Quiet When You Don't.","zh":"需要时出现，无需时静默。"}
+  ],
+  "privacy": [
+    ["No Notchime account.","无需 Notchime 账户。"],
+    ["No custom servers.","无需开发者服务器。"],
+    ["No tracking SDKs.","无用户追踪 SDK。"]
+  ],
+  "testEvent":{"en":"Design review","zh":"设计评审","time":"14:00–15:00"},
+  "testTask":{"en":"Send brief","zh":"发送简报"},
+  "captureEvidence":"assets/trailer-captures/capture-evidence.json",
+  "icon":"assets/notchime-trailer-icon.png",
+  "iphoneIsConceptAnimation":true,
+  "iCloudVerified":false,
+  "productionStatusVisible":false
+}

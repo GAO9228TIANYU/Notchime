@@ -1,0 +1,449 @@
+{
+  "bpm": 150,
+  "timeSignature": "4/4",
+  "durationSeconds": 9.6,
+  "sampleRate": 48000,
+  "videoFps": 60,
+  "beats": [
+    {
+      "index": 0,
+      "time": 0.0,
+      "sample": 0,
+      "frame": 0,
+      "bar": 1,
+      "inBar": 1
+    },
+    {
+      "index": 1,
+      "time": 0.4,
+      "sample": 19200,
+      "frame": 24,
+      "bar": 1,
+      "inBar": 2
+    },
+    {
+      "index": 2,
+      "time": 0.8,
+      "sample": 38400,
+      "frame": 48,
+      "bar": 1,
+      "inBar": 3
+    },
+    {
+      "index": 3,
+      "time": 1.2,
+      "sample": 57600,
+      "frame": 72,
+      "bar": 1,
+      "inBar": 4
+    },
+    {
+      "index": 4,
+      "time": 1.6,
+      "sample": 76800,
+      "frame": 96,
+      "bar": 2,
+      "inBar": 1
+    },
+    {
+      "index": 5,
+      "time": 2.0,
+      "sample": 96000,
+      "frame": 120,
+      "bar": 2,
+      "inBar": 2
+    },
+    {
+      "index": 6,
+      "time": 2.4,
+      "sample": 115200,
+      "frame": 144,
+      "bar": 2,
+      "inBar": 3
+    },
+    {
+      "index": 7,
+      "time": 2.8,
+      "sample": 134400,
+      "frame": 168,
+      "bar": 2,
+      "inBar": 4
+    },
+    {
+      "index": 8,
+      "time": 3.2,
+      "sample": 153600,
+      "frame": 192,
+      "bar": 3,
+      "inBar": 1
+    },
+    {
+      "index": 9,
+      "time": 3.6,
+      "sample": 172800,
+      "frame": 216,
+      "bar": 3,
+      "inBar": 2
+    },
+    {
+      "index": 10,
+      "time": 4.0,
+      "sample": 192000,
+      "frame": 240,
+      "bar": 3,
+      "inBar": 3
+    },
+    {
+      "index": 11,
+      "time": 4.4,
+      "sample": 211200,
+      "frame": 264,
+      "bar": 3,
+      "inBar": 4
+    },
+    {
+      "index": 12,
+      "time": 4.8,
+      "sample": 230400,
+      "frame": 288,
+      "bar": 4,
+      "inBar": 1
+    },
+    {
+      "index": 13,
+      "time": 5.2,
+      "sample": 249600,
+      "frame": 312,
+      "bar": 4,
+      "inBar": 2
+    },
+    {
+      "index": 14,
+      "time": 5.6,
+      "sample": 268800,
+      "frame": 336,
+      "bar": 4,
+      "inBar": 3
+    },
+    {
+      "index": 15,
+      "time": 6.0,
+      "sample": 288000,
+      "frame": 360,
+      "bar": 4,
+      "inBar": 4
+    },
+    {
+      "index": 16,
+      "time": 6.4,
+      "sample": 307200,
+      "frame": 384,
+      "bar": 5,
+      "inBar": 1
+    },
+    {
+      "index": 17,
+      "time": 6.8,
+      "sample": 326400,
+      "frame": 408,
+      "bar": 5,
+      "inBar": 2
+    },
+    {
+      "index": 18,
+      "time": 7.2,
+      "sample": 345600,
+      "frame": 432,
+      "bar": 5,
+      "inBar": 3
+    },
+    {
+      "index": 19,
+      "time": 7.6,
+      "sample": 364800,
+      "frame": 456,
+      "bar": 5,
+      "inBar": 4
+    },
+    {
+      "index": 20,
+      "time": 8.0,
+      "sample": 384000,
+      "frame": 480,
+      "bar": 6,
+      "inBar": 1
+    },
+    {
+      "index": 21,
+      "time": 8.4,
+      "sample": 403200,
+      "frame": 504,
+      "bar": 6,
+      "inBar": 2
+    },
+    {
+      "index": 22,
+      "time": 8.8,
+      "sample": 422400,
+      "frame": 528,
+      "bar": 6,
+      "inBar": 3
+    },
+    {
+      "index": 23,
+      "time": 9.2,
+      "sample": 441600,
+      "frame": 552,
+      "bar": 6,
+      "inBar": 4
+    }
+  ],
+  "majorDownbeats": [
+    0,
+    1.6,
+    3.2,
+    4.8,
+    6.4,
+    8.0
+  ],
+  "bassDrops": [
+    0,
+    3.6,
+    6.8,
+    8.0
+  ],
+  "transitionHits": [
+    0,
+    0.4,
+    1.2,
+    2,
+    2.8,
+    3.2,
+    3.6,
+    4.2,
+    5.4,
+    6,
+    6.8,
+    8
+  ],
+  "uiClicks": [
+    1.6,
+    3.2,
+    6.4
+  ],
+  "finalLogoHit": 8.0,
+  "events": [
+    {
+      "time": 0,
+      "beat": 0.0,
+      "type": "hook_bass",
+      "visual": "hook",
+      "frame60": 0,
+      "major": true
+    },
+    {
+      "time": 0.4,
+      "beat": 1.0,
+      "type": "reveal_hit",
+      "visual": "notch-mask-open",
+      "frame60": 24,
+      "major": true
+    },
+    {
+      "time": 1.2,
+      "beat": 3.0,
+      "type": "push_hit",
+      "visual": "iphone-calendar",
+      "frame60": 72,
+      "major": true
+    },
+    {
+      "time": 1.6,
+      "beat": 4.0,
+      "type": "ui_tap",
+      "visual": "calendar-chip",
+      "frame60": 96,
+      "major": false
+    },
+    {
+      "time": 2,
+      "beat": 5.0,
+      "type": "match_cut_hit",
+      "visual": "mac-calendar",
+      "frame60": 120,
+      "major": true
+    },
+    {
+      "time": 2.4,
+      "beat": 6.0,
+      "type": "synth_stab",
+      "visual": "calendar-match-accent",
+      "frame60": 144,
+      "major": false
+    },
+    {
+      "time": 2.8,
+      "beat": 7.0,
+      "type": "reminder_hit",
+      "visual": "mac-reminders",
+      "frame60": 168,
+      "major": true
+    },
+    {
+      "time": 3.2,
+      "beat": 8.0,
+      "type": "ui_click",
+      "visual": "complete-task",
+      "frame60": 192,
+      "major": true
+    },
+    {
+      "time": 3.6,
+      "beat": 9.0,
+      "type": "bass_drop",
+      "visual": "iphone-completed",
+      "frame60": 216,
+      "major": true
+    },
+    {
+      "time": 4.2,
+      "beat": 10.5,
+      "type": "countdown_snap",
+      "visual": "countdown",
+      "frame60": 252,
+      "major": true
+    },
+    {
+      "time": 4.4,
+      "beat": 11.0,
+      "type": "tick",
+      "visual": "countdown-number-flip",
+      "frame60": 264,
+      "major": false
+    },
+    {
+      "time": 4.8,
+      "beat": 12.0,
+      "type": "tick",
+      "visual": "countdown-camera-settle",
+      "frame60": 288,
+      "major": false
+    },
+    {
+      "time": 5,
+      "beat": 12.5,
+      "type": "riser",
+      "visual": "smart-riser",
+      "frame60": 300,
+      "major": false
+    },
+    {
+      "time": 5.4,
+      "beat": 13.5,
+      "type": "collapse_hit",
+      "visual": "smart-collapse",
+      "frame60": 324,
+      "major": true
+    },
+    {
+      "time": 5.6,
+      "beat": 14.0,
+      "type": "sub_kick",
+      "visual": "quiet-notch",
+      "frame60": 336,
+      "major": false
+    },
+    {
+      "time": 6,
+      "beat": 15.0,
+      "type": "reveal_hit",
+      "visual": "smart-reveal",
+      "frame60": 360,
+      "major": true
+    },
+    {
+      "time": 6.4,
+      "beat": 16.0,
+      "type": "ui_tap",
+      "visual": "hover-protection",
+      "frame60": 384,
+      "major": false
+    },
+    {
+      "time": 6.8,
+      "beat": 17.0,
+      "type": "privacy_hit",
+      "visual": "privacy",
+      "frame60": 408,
+      "major": true
+    },
+    {
+      "time": 7.2,
+      "beat": 18.0,
+      "type": "snap",
+      "visual": "server-phrase-emphasis",
+      "frame60": 432,
+      "major": false
+    },
+    {
+      "time": 7.6,
+      "beat": 19.0,
+      "type": "snap",
+      "visual": "tracking-phrase-emphasis",
+      "frame60": 456,
+      "major": false
+    },
+    {
+      "time": 8,
+      "beat": 20.0,
+      "type": "logo_hit",
+      "visual": "brand",
+      "frame60": 480,
+      "major": true
+    },
+    {
+      "time": 8.12,
+      "beat": 20.3,
+      "type": "logo_note",
+      "visual": "sonic-logo-note-2",
+      "frame60": 487,
+      "major": false
+    },
+    {
+      "time": 8.28,
+      "beat": 20.7,
+      "type": "logo_note",
+      "visual": "sonic-logo-note-3",
+      "frame60": 497,
+      "major": false
+    }
+  ],
+  "sections": [
+    {
+      "from": 0,
+      "to": 1.2,
+      "energy": "immediate hook + short silence contrast"
+    },
+    {
+      "from": 1.2,
+      "to": 4.2,
+      "energy": "syncopated bass + staccato synth + UI click"
+    },
+    {
+      "from": 4.2,
+      "to": 6.8,
+      "energy": "double-time ticks + collapse/reveal contrast"
+    },
+    {
+      "from": 6.8,
+      "to": 8,
+      "energy": "drums thin out, 3 deliberate snaps + rising pickup"
+    },
+    {
+      "from": 8,
+      "to": 9.6,
+      "energy": "strongest logo hit + 3-note sonic signature + controlled tail"
+    }
+  ],
+  "copyright": "Original synthesis; no third-party audio samples"
+}

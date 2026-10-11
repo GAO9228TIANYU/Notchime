@@ -1,0 +1,41 @@
+1
+00:00:00,000 --> 00:00:01,200
+Meet Notchime.
+遇见 Notchime。
+
+2
+00:00:01,200 --> 00:00:02,000
+Plan on iPhone.
+在 iPhone 安排日程。
+
+3
+00:00:02,000 --> 00:00:02,800
+See it on Mac.
+在 Mac 随时查看。
+
+4
+00:00:02,800 --> 00:00:04,200
+Done here. Synced there.
+这里完成，多端同步。
+
+5
+00:00:04,200 --> 00:00:05,400
+Every moment matters.
+重要时刻，不再错过。
+
+6
+00:00:05,400 --> 00:00:06,800
+Only when needed.
+需要时，才出现。
+
+7
+00:00:06,800 --> 00:00:08,000
+Local-first. Privacy-first.
+No Notchime account · No custom servers · No tracking SDKs
+本地优先，隐私优先。
+无需 Notchime 账户 · 无需开发者服务器 · 无用户追踪 SDK
+
+8
+00:00:08,000 --> 00:00:09,600
+There When You Need It. Quiet When You Don't.
+需要时出现，无需时静默。

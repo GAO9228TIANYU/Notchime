@@ -1,0 +1,36 @@
+[Script Info]
+Title: Notchime bilingual launch PREVIEW
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: EN,Noto Sans CJK SC,46,&H00FAF2F0,&H00FFFFFF,&H0020120E,&H80000000,0,0,0,0,100,100,0,0,1,1,0,2,100,100,100,1
+Style: ZH,Noto Sans CJK SC,31,&H00C6AEA6,&H00FFFFFF,&H0020120E,&H80000000,0,0,0,0,100,100,0,0,1,1,0,2,100,100,50,1
+Style: Small,Noto Sans CJK SC,24,&H00C6AEA6,&H00FFFFFF,&H0020120E,&H80000000,0,0,0,0,100,100,0,0,1,1,0,2,90,90,220,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.45,0:00:04.65,EN,,0,0,0,,{\pos(960,950)\fad(200,150)}Meet Notchime.
+Dialogue: 0,0:00:00.45,0:00:04.65,ZH,,0,0,0,,{\pos(960,1005)\fad(200,150)}遇见 Notchime。
+Dialogue: 0,0:00:05.45,0:00:13.55,EN,,0,0,0,,{\pos(960,950)\fad(200,150)}Plan your day on iPhone.
+Dialogue: 0,0:00:05.45,0:00:13.55,ZH,,0,0,0,,{\pos(960,1005)\fad(200,150)}在 iPhone 上，轻松安排每一天。
+Dialogue: 0,0:00:14.45,0:00:20.10,EN,,0,0,0,,{\pos(960,950)\fad(200,150)}One Apple ecosystem. No duplicate entry.
+Dialogue: 0,0:00:14.45,0:00:20.10,ZH,,0,0,0,,{\pos(960,1005)\fad(200,150)}融入 Apple 生态，无需重复录入。
+Dialogue: 0,0:00:20.30,0:00:25.55,EN,,0,0,0,,{\pos(960,950)\fad(200,150)}Your day, right in your notch.
+Dialogue: 0,0:00:20.30,0:00:25.55,ZH,,0,0,0,,{\pos(960,1005)\fad(200,150)}你的日程，就在刘海之间。
+Dialogue: 0,0:00:26.45,0:00:35.55,EN,,0,0,0,,{\pos(960,950)\fad(200,150)}Complete here. Updated across your devices.
+Dialogue: 0,0:00:26.45,0:00:35.55,ZH,,0,0,0,,{\pos(960,1005)\fad(200,150)}在 Mac 上完成，在 Apple 设备间同步更新。
+Dialogue: 0,0:00:36.45,0:00:43.55,EN,,0,0,0,,{\pos(960,950)\fad(200,150)}Your schedule. Your data. Your privacy.
+Dialogue: 0,0:00:36.45,0:00:43.55,ZH,,0,0,0,,{\pos(960,1005)\fad(200,150)}你的日程，你的数据，你的隐私。
+Dialogue: 1,0:00:39.00,0:00:43.55,Small,,0,0,0,,{\pos(960,814)\fad(200,150)}No Notchime account · No custom servers · No tracking in current app code
+Dialogue: 1,0:00:39.00,0:00:43.55,Small,,0,0,0,,{\pos(960,853)\fad(200,150)}无需 Notchime 账户 · 无需开发者服务器 · 当前应用代码不追踪用户
+Dialogue: 0,0:00:44.45,0:00:51.55,EN,,0,0,0,,{\pos(960,950)\fad(200,150)}Only when it matters.
+Dialogue: 0,0:00:44.45,0:00:51.55,ZH,,0,0,0,,{\pos(960,1005)\fad(200,150)}只在需要时，恰到好处地出现。
+Dialogue: 0,0:00:53.10,0:01:00.00,EN,,0,0,0,,{\pos(960,950)\fad(200,150)}There When You Need It. Quiet When You Don't.
+Dialogue: 0,0:00:53.10,0:01:00.00,ZH,,0,0,0,,{\pos(960,1005)\fad(200,150)}需要时出现，无需时静默。
+Dialogue: 1,0:00:55.40,0:01:00.00,Small,,0,0,0,,{\pos(960,814)\fad(200,150)}Made for macOS · Local-first · Open Source
+Dialogue: 1,0:00:55.40,0:01:00.00,Small,,0,0,0,,{\pos(960,853)\fad(200,150)}专为 macOS 打造 · 本地优先 · 开源

@@ -1,0 +1,83 @@
+{
+  "createdOn": "2026-10-11",
+  "applicationCodeModified": false,
+  "realEventKitAccess": false,
+  "personalDataUsed": false,
+  "sourceScreenshot": "promo/notchime-launch/assets/trailer-captures/mac-before.png",
+  "sourceScreenshotSHA256": "39d41b0f94351cf1d6bf0fa2ce87f4fad86c6b5f6775197efa001a6d8a2f2630",
+  "sourceEvidence": "promo/notchime-launch/assets/trailer-captures/capture-evidence.json",
+  "captureMethod": "Existing actual Main/Preload/Renderer with isolated JSON Lines fixture; no interface redraw; crop/downsample only.",
+  "iconOrigin": "build/notchime-icon.png; supplied by maintainer; public redistribution rights pending confirmation",
+  "mediaSelection": "User approved exact notchime-trailer-10s.mp4 on 2026-10-11; static poster links to an unchanged local MP4; no automatic playback.",
+  "files": [
+    {
+      "file": "calendar-preview.png",
+      "bytes": 28813,
+      "sha256": "6dd1671d0be5642beaf0f552c5475ec8df76d34910dca51f0424e7ece10bb961",
+      "kind": "actual Electron screenshot with fictional fixture data"
+    },
+    {
+      "file": "countdown-preview.png",
+      "bytes": 49029,
+      "sha256": "0afecb1d2fb724430cdcc9aa55bcaf11d4c01290d7cb7d500d9d6eb9bfa8ec9a",
+      "kind": "actual Electron screenshot with fictional fixture data"
+    },
+    {
+      "file": "notchime-dashboard.png",
+      "bytes": 241522,
+      "sha256": "44a16314d0174f548a77f59c90bff042e6d3fdd99b4caa7e7ad607b2b3e04d0c",
+      "kind": "actual Electron screenshot with fictional fixture data"
+    },
+    {
+      "file": "notchime-icon.png",
+      "bytes": 56122,
+      "sha256": "62aac14318a2921f67f8cbeb1db1d6793bd13dda8f314fda1fdb04197a1d4f85",
+      "kind": "user-supplied icon derivative"
+    },
+    {
+      "file": "platform-badges.svg",
+      "bytes": 878,
+      "sha256": "9ec6794d2ad6b14711dfb332232e537ffe401698481b7b49dff9337e996ef2fd",
+      "kind": "original static badge"
+    },
+    {
+      "file": "reminders-preview.png",
+      "bytes": 30575,
+      "sha256": "51ff8049387f89a2c5ddd81eea20f9bcb7acd1eb4811fa993e82aa561d153d05",
+      "kind": "actual Electron screenshot with fictional fixture data"
+    },
+    {
+      "file": "notchime-trailer-10s.mp4",
+      "bytes": 2262104,
+      "sha256": "4521fa63c6953c6266d41d712b661dbb07bd6187fc9960639c65a3f27d7012ce",
+      "kind": "approved product film, unchanged copy"
+    },
+    {
+      "file": "notchime-film-poster.png",
+      "bytes": 197446,
+      "sha256": "30f0c71bf4a1c8d5e4877e05c973d26922562226a172e4554f9e245f3c9d7a70",
+      "kind": "exact approved-film frame resized"
+    },
+    {
+      "file": "smart-notch-preview.png",
+      "bytes": 25845,
+      "sha256": "d5fdf4308208b4f6ae59f485ae7a8a57ba70b36d1c32c358379612751b4acd80",
+      "kind": "actual Electron fixture screenshot crop"
+    }
+  ],
+  "video": {
+    "source": "promo/notchime-launch/output/notchime-trailer-10s.mp4",
+    "approvedByMaintainer": true,
+    "durationSeconds": 9.6,
+    "dimensions": [
+      1920,
+      1080
+    ],
+    "encodedFrameRate": 60,
+    "audio": "AAC 48 kHz stereo",
+    "phoneScenes": "illustrative animation, not recorded iPhone synchronization",
+    "macScenes": "real fixture Electron window composited into an illustrative device frame",
+    "smartNotchTiming": "edited for pacing, not a real-time four-second timing test",
+    "originalSHA256": "4521fa63c6953c6266d41d712b661dbb07bd6187fc9960639c65a3f27d7012ce"
+  }
+}

@@ -1,0 +1,18 @@
+Notchime
+Current developer and maintainer: GAO TIANYU
+GitHub: https://github.com/GAO9228TIANYU
+Contact: tianyu.gaospk@gmail.com
+
+Notchime contains modified code derived from TO-DO Panel v1.2.0,
+maintained upstream by xiaopu-ai and contributors:
+https://github.com/xiaopu-ai/TO-DO-Panel/tree/v1.2.0
+
+Upstream copyright notice (also preserved verbatim in LICENSE):
+Copyright (c) 2026 TO-DO Panel contributors
+
+Notchime-specific modifications are maintained by GAO TIANYU.
+The upstream MIT license and its permission/disclaimer notice are retained;
+this notice does not replace LICENSE or relicense upstream or third-party code.
+
+See THIRD_PARTY_NOTICES.md for the Electron runtime, development tooling,
+asset provenance and distribution requirements.

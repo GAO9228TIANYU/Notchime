@@ -1,0 +1,53 @@
+1
+00:00:00,450 --> 00:00:04,650
+Meet Notchime.
+遇见 Notchime。
+
+2
+00:00:05,450 --> 00:00:13,550
+Plan your day on iPhone.
+在 iPhone 上，轻松安排每一天。
+
+3
+00:00:14,450 --> 00:00:20,100
+One Apple ecosystem. No duplicate entry.
+融入 Apple 生态，无需重复录入。
+
+4
+00:00:20,300 --> 00:00:25,550
+Your day, right in your notch.
+你的日程，就在刘海之间。
+
+5
+00:00:26,450 --> 00:00:35,550
+Complete here. Updated across your devices.
+在 Mac 上完成，在 Apple 设备间同步更新。
+
+6
+00:00:36,450 --> 00:00:39,000
+Your schedule. Your data. Your privacy.
+你的日程，你的数据，你的隐私。
+
+7
+00:00:39,000 --> 00:00:43,550
+Your schedule. Your data. Your privacy.
+你的日程，你的数据，你的隐私。
+No Notchime account · No custom servers · No tracking in current app code
+无需 Notchime 账户 · 无需开发者服务器 · 当前应用代码不追踪用户
+
+8
+00:00:44,450 --> 00:00:51,550
+Only when it matters.
+只在需要时，恰到好处地出现。
+
+9
+00:00:53,100 --> 00:00:55,400
+There When You Need It. Quiet When You Don't.
+需要时出现，无需时静默。
+
+10
+00:00:55,400 --> 00:01:00,000
+There When You Need It. Quiet When You Don't.
+需要时出现，无需时静默。
+Made for macOS · Local-first · Open Source
+专为 macOS 打造 · 本地优先 · 开源

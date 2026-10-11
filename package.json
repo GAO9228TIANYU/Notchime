@@ -1,0 +1,160 @@
+{
+  "name": "calendar-notch-dev",
+  "version": "1.2.0",
+  "description": "Notchime — There When You Need It. Quiet When You Don't.",
+  "main": "main.js",
+  "author": {
+    "name": "GAO TIANYU",
+    "email": "tianyu.gaospk@gmail.com",
+    "url": "https://github.com/GAO9228TIANYU"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "node scripts/test-desktop.js",
+    "start": "electron .",
+    "build": "NO_UPDATE_NOTIFIER=1 electron-builder --mac dmg --publish never",
+    "build:zip": "NO_UPDATE_NOTIFIER=1 electron-builder --mac zip",
+    "pack": "NO_UPDATE_NOTIFIER=1 electron-builder --dir",
+    "test:unit": "node --test tests/*.test.js",
+    "prestart": "node scripts/build-calendar-helper.js",
+    "native:build": "node scripts/build-calendar-helper.js",
+    "prebuild": "node scripts/build-calendar-helper.js",
+    "prepack": "node scripts/build-calendar-helper.js",
+    "prebuild:zip": "node scripts/build-calendar-helper.js"
+  },
+  "devDependencies": {
+    "electron": "^44.0.0",
+    "electron-builder": "^26.15.7"
+  },
+  "build": {
+    "appId": "com.calendarnotch.dev",
+    "productName": "Calendar Notch Dev",
+    "artifactName": "Calendar-Notch-Dev-${version}-${arch}.${ext}",
+    "copyright": "© 2026 GAO TIANYU; portions © 2026 TO-DO Panel contributors",
+    "asar": false,
+    "directories": {
+      "output": "dist.noindex",
+      "buildResources": "build"
+    },
+    "afterPack": "./build/afterPack.js",
+    "files": [
+      "main.js",
+      "main-services.js",
+      "preload.js",
+      "renderer/app.js",
+      "renderer/calendar-model.js",
+      "renderer/calendar.css",
+      "renderer/countdown-model.js",
+      "renderer/countdown-picker.js",
+      "renderer/countdown.css",
+      "renderer/countdown.js",
+      "renderer/index.html",
+      "renderer/panel-interaction.js",
+      "renderer/reminders-model.js",
+      "renderer/reminders.js",
+      "renderer/styles.css",
+      "package.json",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/.bin",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+      "calendar-settings.js",
+      "countdown-store.js",
+      "countdown-ipc.js",
+      "calendar-provider.js",
+      "calendar-bridge.js",
+      "calendar-ipc.js",
+      "automatic-reveal.js",
+      "calendar-reminders.js",
+      "reminders-provider.js",
+      "reminders-ipc.js",
+      "LICENSE",
+      "NOTICE",
+      "THIRD_PARTY_NOTICES.md",
+      "!{.cache,.claude,docs,promo,tests,scripts}/**",
+      "!AGENTS.md",
+      "!CLAUDE.md",
+      "!HARNESS-GUIDE.md",
+      "!.env*"
+    ],
+    "mac": {
+      "icon": "build/notchime-icon.icns",
+      "category": "public.app-category.productivity",
+      "minimumSystemVersion": "13.0",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ],
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "darkModeSupport": true,
+      "extendInfo": {
+        "LSUIElement": true,
+        "NSHighResolutionCapable": true,
+        "CFBundleDisplayName": "Calendar Notch Dev",
+        "NSCalendarsUsageDescription": "Calendar Notch 只读取系统日历，展示今天及未来 7 天的日程，不会创建、修改或删除日程。",
+        "NSCalendarsFullAccessUsageDescription": "Calendar Notch 只读取系统日历，展示今天及未来 7 天的日程，不会创建、修改或删除日程。",
+        "NSRemindersUsageDescription": "展示今天及已逾期的 Apple Reminders 待办，仅在您主动点击时标记完成，不创建、编辑或删除事项。",
+        "NSRemindersFullAccessUsageDescription": "展示今天及已逾期的 Apple Reminders 待办，仅在您主动点击时标记完成，不创建、编辑或删除事项。"
+      }
+    },
+    "dmg": {
+      "title": "Calendar Notch Dev ${version}",
+      "iconSize": 100,
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "window": {
+        "width": 540,
+        "height": 380
+      }
+    },
+    "extraResources": [
+      {
+        "from": ".cache/native/CalendarNotchCalendarHelper.app",
+        "to": "native/CalendarNotchCalendarHelper.app"
+      },
+      {
+        "from": "node_modules/electron/dist/LICENSE",
+        "to": "licenses/electron/LICENSE"
+      },
+      {
+        "from": "node_modules/electron/dist/LICENSES.chromium.html",
+        "to": "licenses/electron/LICENSES.chromium.html"
+      }
+    ]
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "overrides": {
+    "brace-expansion@^1.0.0": "1.1.21",
+    "brace-expansion@^2.0.0": "2.1.7",
+    "brace-expansion@^5.0.0": "5.0.12",
+    "fast-uri@^3.0.0": "3.1.8",
+    "undici@^6.0.0": "6.28.1",
+    "undici@^7.0.0": "7.29.1",
+    "http-cache-semantics@^4.0.0": "4.3.0"
+  },
+  "contributors": [
+    {
+      "name": "TO-DO Panel contributors",
+      "url": "https://github.com/xiaopu-ai/TO-DO-Panel"
+    }
+  ]
+}

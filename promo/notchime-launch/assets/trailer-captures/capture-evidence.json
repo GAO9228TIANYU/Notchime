@@ -1,0 +1,663 @@
+{
+  "kind": "real-electron-fixture-capture",
+  "eventKitAccess": false,
+  "personalDataAccess": false,
+  "syncVerified": false,
+  "recordedAt": "2026-10-11T10:55:08.529Z",
+  "testData": {
+    "authorization": "authorized",
+    "remindersAuthorization": "authorized",
+    "calendars": [
+      {
+        "id": "promo-calendar",
+        "name": "Notchime",
+        "color": "#7C8EFF",
+        "source": {
+          "id": "demo",
+          "name": "DEMO DATA"
+        }
+      }
+    ],
+    "events": [
+      {
+        "id": "demo-review",
+        "eventIdentifier": "demo-review",
+        "externalIdentifier": "demo-review",
+        "occurrenceStart": "2026-10-11T05:00:00.000Z",
+        "title": "设计评审 · Design review",
+        "start": "2026-10-11T05:00:00.000Z",
+        "end": "2026-10-11T06:00:00.000Z",
+        "allDay": false,
+        "timeZone": "Asia/Seoul",
+        "calendar": {
+          "id": "promo-calendar",
+          "name": "Notchime",
+          "color": "#7C8EFF",
+          "source": {
+            "id": "demo",
+            "name": "DEMO DATA"
+          }
+        }
+      }
+    ],
+    "reminders": [
+      {
+        "id": "demo-deck",
+        "title": "发送简报 · Send brief",
+        "dueDate": "2026-10-11",
+        "listName": "Notchime"
+      }
+    ]
+  },
+  "clips": {
+    "complete": {
+      "duration": 2.4,
+      "frames": [
+        {
+          "at": 0,
+          "file": "0000.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 0.132,
+          "file": "0001.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 0.262,
+          "file": "0002.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 0.395,
+          "file": "0003.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 0.523,
+          "file": "0004.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 0.653,
+          "file": "0005.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 0.79,
+          "file": "0006.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 0.922,
+          "file": "0007.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 1.051,
+          "file": "0008.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 1.178,
+          "file": "0009.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 1.307,
+          "file": "0010.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 1.436,
+          "file": "0011.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 1.563,
+          "file": "0012.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 1.695,
+          "file": "0013.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 1.828,
+          "file": "0014.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 1.963,
+          "file": "0015.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 2.096,
+          "file": "0016.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 2.229,
+          "file": "0017.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 2.361,
+          "file": "0018.png",
+          "width": 2480,
+          "height": 1232
+        }
+      ]
+    },
+    "smart-notch": {
+      "duration": 8,
+      "frames": [
+        {
+          "at": 0,
+          "file": "0000.png",
+          "width": 400,
+          "height": 66
+        },
+        {
+          "at": 0.052,
+          "file": "0001.png",
+          "width": 400,
+          "height": 66
+        },
+        {
+          "at": 0.103,
+          "file": "0002.png",
+          "width": 400,
+          "height": 66
+        },
+        {
+          "at": 0.154,
+          "file": "0003.png",
+          "width": 400,
+          "height": 66
+        },
+        {
+          "at": 0.205,
+          "file": "0004.png",
+          "width": 400,
+          "height": 66
+        },
+        {
+          "at": 0.256,
+          "file": "0005.png",
+          "width": 400,
+          "height": 66
+        },
+        {
+          "at": 0.307,
+          "file": "0006.png",
+          "width": 400,
+          "height": 66
+        },
+        {
+          "at": 0.358,
+          "file": "0007.png",
+          "width": 400,
+          "height": 66
+        },
+        {
+          "at": 0.409,
+          "file": "0008.png",
+          "width": 400,
+          "height": 66
+        },
+        {
+          "at": 0.46,
+          "file": "0009.png",
+          "width": 400,
+          "height": 66
+        },
+        {
+          "at": 0.511,
+          "file": "0010.png",
+          "width": 400,
+          "height": 66
+        },
+        {
+          "at": 0.561,
+          "file": "0011.png",
+          "width": 400,
+          "height": 66
+        },
+        {
+          "at": 0.612,
+          "file": "0012.png",
+          "width": 400,
+          "height": 66
+        },
+        {
+          "at": 0.664,
+          "file": "0013.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 0.729,
+          "file": "0014.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 0.83,
+          "file": "0015.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 0.96,
+          "file": "0016.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 1.091,
+          "file": "0017.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 1.216,
+          "file": "0018.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 1.343,
+          "file": "0019.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 1.465,
+          "file": "0020.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 1.59,
+          "file": "0021.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 1.71,
+          "file": "0022.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 1.831,
+          "file": "0023.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 1.961,
+          "file": "0024.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 2.085,
+          "file": "0025.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 2.212,
+          "file": "0026.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 2.332,
+          "file": "0027.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 2.452,
+          "file": "0028.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 2.579,
+          "file": "0029.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 2.712,
+          "file": "0030.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 2.833,
+          "file": "0031.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 2.958,
+          "file": "0032.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 3.082,
+          "file": "0033.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 3.207,
+          "file": "0034.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 3.334,
+          "file": "0035.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 3.458,
+          "file": "0036.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 3.576,
+          "file": "0037.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 3.696,
+          "file": "0038.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 3.815,
+          "file": "0039.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 3.934,
+          "file": "0040.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 4.058,
+          "file": "0041.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 4.184,
+          "file": "0042.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 4.31,
+          "file": "0043.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 4.433,
+          "file": "0044.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 4.553,
+          "file": "0045.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 4.679,
+          "file": "0046.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 4.8,
+          "file": "0047.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 4.924,
+          "file": "0048.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 5.049,
+          "file": "0049.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 5.171,
+          "file": "0050.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 5.294,
+          "file": "0051.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 5.419,
+          "file": "0052.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 5.543,
+          "file": "0053.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 5.67,
+          "file": "0054.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 5.795,
+          "file": "0055.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 5.92,
+          "file": "0056.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 6.044,
+          "file": "0057.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 6.164,
+          "file": "0058.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 6.287,
+          "file": "0059.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 6.412,
+          "file": "0060.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 6.536,
+          "file": "0061.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 6.662,
+          "file": "0062.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 6.784,
+          "file": "0063.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 6.905,
+          "file": "0064.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 7.024,
+          "file": "0065.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 7.143,
+          "file": "0066.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 7.269,
+          "file": "0067.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 7.411,
+          "file": "0068.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 7.509,
+          "file": "0069.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 7.561,
+          "file": "0070.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 7.612,
+          "file": "0071.png",
+          "width": 2480,
+          "height": 1232
+        },
+        {
+          "at": 7.662,
+          "file": "0072.png",
+          "width": 400,
+          "height": 66
+        },
+        {
+          "at": 7.712,
+          "file": "0073.png",
+          "width": 400,
+          "height": 66
+        },
+        {
+          "at": 7.764,
+          "file": "0074.png",
+          "width": 400,
+          "height": 66
+        },
+        {
+          "at": 7.816,
+          "file": "0075.png",
+          "width": 400,
+          "height": 66
+        },
+        {
+          "at": 7.866,
+          "file": "0076.png",
+          "width": 400,
+          "height": 66
+        },
+        {
+          "at": 7.917,
+          "file": "0077.png",
+          "width": 400,
+          "height": 66
+        },
+        {
+          "at": 7.968,
+          "file": "0078.png",
+          "width": 400,
+          "height": 66
+        }
+      ]
+    }
+  },
+  "completionTarget": {
+    "x": 52,
+    "y": 428.84375
+  },
+  "fixtureCompletionConfirmed": true,
+  "smartNotchEndState": {
+    "expanded": false,
+    "busy": false,
+    "tab": "calendar",
+    "source": null
+  }
+}

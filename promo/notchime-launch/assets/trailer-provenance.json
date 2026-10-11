@@ -1,0 +1,10 @@
+{
+  "iconSource": "build/notchime-icon.png",
+  "iconSha256": "8db10d30c59c87ba0a22e5163ac46d7942f81caca401895e2676d025efdcead1",
+  "publicIconRedistributionRights": "pending maintainer confirmation per project README",
+  "music": "original procedural synthesis",
+  "fontLicense": "SIL OFL 1.1",
+  "captures": "actual Electron / synthetic fixtures",
+  "iPhone": "concept animation",
+  "iCloudVerified": false
+}

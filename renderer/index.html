@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob:; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notchime</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="calendar.css" />
+  <link rel="stylesheet" href="countdown.css" />
+</head>
+<body>
+  <div id="app" class="collapsed calendar-workspace">
+    <div id="notch" class="notch" role="button" tabindex="0" aria-label="展开 Notchime" aria-expanded="false" aria-controls="panel"><div class="notch-dot"></div></div>
+    <div id="panel" class="panel" aria-hidden="true" inert>
+      <header class="topbar">
+        <div class="tabs" id="tabs" role="tablist" aria-label="工作台页面">
+          <button class="tab" id="tab-button-calendar" type="button" data-tab="calendar" role="tab" aria-controls="tab-calendar" aria-selected="false" tabindex="-1">
+            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4m8-4v4M4 10h16m-11 4h2m3 0h2m-7 3h2"/></svg><span>日程</span>
+          </button>
+          <button class="tab" id="tab-button-settings" type="button" data-tab="settings" role="tab" aria-controls="tab-settings" aria-selected="false" tabindex="-1">
+            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m9 3-1 3-3 1-2 3 2 2v4l3 1 1 4h6l1-4 3-1v-4l2-2-2-3-3-1-1-3z"/></svg><span>设置</span>
+          </button>
+          <div id="tab-indicator" class="tab-indicator" aria-hidden="true"></div>
+        </div>
+        <div class="topbar-actions"><button id="collapse-btn" class="collapse-btn squircle" type="button" title="收起面板 · Escape" aria-label="收起面板"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m6 14 6-6 6 6"/></svg></button></div>
+      </header>
+      <main class="panels">
+        <section id="tab-calendar" class="tab-panel" role="tabpanel" aria-labelledby="tab-button-calendar" aria-hidden="true" inert>
+          <div class="calendar-page">
+            <section id="automatic-presentation" class="automatic-presentation" role="status" hidden><span id="automatic-label" class="calendar-eyebrow"></span><strong id="automatic-title"></strong><span id="automatic-detail" class="calendar-muted"></span></section>
+            <section id="countdowns" class="countdown-section" aria-labelledby="countdown-heading">
+              <div class="calendar-card-heading"><h2 id="countdown-heading">重要倒计时 <span class="countdown-heading-hint">本地里程碑</span></h2><button id="countdown-add" class="calendar-button" type="button" disabled>＋ 添加</button></div>
+              <p id="countdown-status" class="countdown-status" role="status" aria-live="polite"></p>
+              <div id="countdown-empty" class="countdown-empty" hidden><p>论文截止、考试、纪念日……为重要的日子留一个位置。</p><button id="countdown-empty-add" class="calendar-button" type="button">添加第一个倒计时</button></div>
+              <div id="countdown-list" class="countdown-list"></div>
+              <button id="countdown-view-all" class="calendar-button countdown-view-all" type="button" hidden aria-expanded="false">查看全部</button>
+              <button id="countdown-retry" class="calendar-button" type="button" hidden>重新读取</button>
+            </section>
+            <div class="calendar-grid">
+              <section class="tile calendar-today"><div class="calendar-card-heading"><h2>今天的日程</h2><span id="today-count" class="calendar-muted"></span></div><div class="today-content"><div id="today-events" class="calendar-event-list"></div><section class="reminders-section" aria-labelledby="reminders-heading"><h3 id="reminders-heading">今日待办</h3><div id="reminders-list"></div><p id="reminders-status" class="calendar-footnote" role="status" aria-live="polite"></p><div class="calendar-access-actions"><button id="reminders-authorize" class="calendar-button" type="button" hidden>允许访问提醒事项</button><button id="reminders-system-settings" class="calendar-button" type="button" hidden>系统提醒事项权限</button><button id="reminders-reload" class="calendar-button" type="button" hidden>重新加载待办</button></div><p class="calendar-footnote reminders-privacy">来自 Apple Reminders · 仅查看与标记完成</p></section></div><p id="calendar-status" class="calendar-footnote" role="status" aria-live="polite">正在读取系统日历……</p></section>
+              <section class="tile calendar-next"><h2>下一项日程</h2><div id="next-event"></div></section>
+              <section class="tile calendar-week"><div class="calendar-card-heading"><h2>未来 7 天</h2><span class="calendar-muted">预览</span></div><div id="week-events" class="calendar-week-list"></div></section>
+            </div>
+          </div>
+        </section>
+        <section id="tab-settings" class="tab-panel" role="tabpanel" aria-labelledby="tab-button-settings" aria-hidden="true" inert>
+          <div class="calendar-settings-page">
+            <div class="calendar-heading"><div><p class="calendar-eyebrow">PREFERENCES</p><h1>设置</h1></div><span class="demo-badge">本地日历</span></div>
+            <div class="calendar-settings-grid">
+              <section class="tile calendar-settings-card"><h2>应用</h2><label class="calendar-setting-row"><span>开机自动启动</span><input id="settings-auto-launch" type="checkbox" disabled /></label><p id="auto-launch-note" class="calendar-footnote"></p><label class="calendar-setting-row" for="settings-auto-collapse"><span>自动收起时间</span><span><input id="settings-auto-collapse" type="number" min="1" max="60" step="1" value="4" aria-describedby="auto-collapse-note" /> 秒</span></label><p id="auto-collapse-note" class="calendar-footnote">默认 4 秒，仅用于自动展开。悬停时暂停，移开后重新计时；手动操作后保持展开。</p></section>
+              <section class="tile calendar-settings-card"><h2>日历</h2><p id="calendar-authorization" class="calendar-muted" role="status">正在读取授权状态……</p><p class="calendar-footnote">macOS 的读取权限包含完整日历访问；本应用只读取，不创建、修改或删除日程。数据由系统日历账户同步。</p><div class="calendar-access-actions"><button id="calendar-authorize" class="calendar-button" type="button" hidden>允许读取日历</button><button id="calendar-system-settings" class="calendar-button" type="button" hidden>系统日历权限</button><button id="calendar-reload" class="calendar-button" type="button">重新加载</button></div><div id="calendar-selection" class="calendar-selection" aria-label="选择展示的日历"></div><p id="calendar-settings-error" class="calendar-footnote" role="alert"></p></section>
+              <section class="tile calendar-settings-card"><h2>刘海提醒</h2><label class="calendar-setting-row" for="settings-reminder-minutes"><span>日程提前提醒</span><select id="settings-reminder-minutes"><option value="0">关闭</option><option value="5">提前 5 分钟</option><option value="10" selected>提前 10 分钟</option><option value="15">提前 15 分钟</option></select></label><p class="calendar-footnote">仅提醒已选日历中的非全天日程。不发送系统通知，不修改 Apple Calendar 提醒。手动使用面板时不会打断。</p><p id="reminder-error" class="calendar-footnote" role="alert"></p><h2 class="calendar-subheading">今日概览</h2><p class="calendar-muted">启动、唤醒和解锁后临时展开；同一次恢复只显示一次。不抢夺其他应用焦点。</p></section>
+              <section class="tile calendar-settings-card"><h2>关于应用</h2><p id="about-version" class="calendar-muted">Notchime</p><p class="calendar-muted">开发与维护：GAO TIANYU<br />需要时出现，无需时静默。</p><button id="settings-about" class="calendar-button" type="button">关于应用</button></section>
+            </div>
+            <p id="settings-status" class="calendar-setting-status" role="status" aria-live="polite"></p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <dialog id="countdown-editor" class="countdown-dialog" aria-labelledby="countdown-editor-title" aria-describedby="countdown-form-error">
+    <form id="countdown-form" novalidate>
+      <h2 id="countdown-editor-title">添加倒计时</h2>
+      <p class="calendar-footnote">保存在本机，使用当前本地日期与时间。</p>
+      <label>名称 <input id="countdown-title" name="title" type="text" maxlength="80" required autocomplete="off" /></label>
+      <div class="countdown-form-dates">
+        <div><label for="countdown-date">目标日期</label><div class="countdown-picker-field"><input id="countdown-date" name="targetDate" type="date" min="0001-01-01" max="9999-12-31" required /><button id="countdown-date-open" type="button" aria-label="选择目标日期" aria-haspopup="dialog" aria-controls="countdown-picker-dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4m8-4v4M4 10h16"/></svg></button></div></div>
+        <div><label for="countdown-time">目标时间 <span class="calendar-muted">可选</span></label><div class="countdown-picker-field"><input id="countdown-time" name="targetTime" type="time" step="60" /><button id="countdown-time-open" type="button" aria-label="选择目标时间" aria-haspopup="dialog" aria-controls="countdown-picker-dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></button></div></div>
+      </div>
+      <label>颜色 <select id="countdown-color" name="color" aria-label="倒计时颜色"></select></label>
+      <label class="countdown-pin-field"><input id="countdown-pinned" name="pinned" type="checkbox" /> 置顶显示</label>
+      <p id="countdown-form-error" class="countdown-error" role="alert"></p>
+      <div class="countdown-dialog-actions"><button id="countdown-cancel" class="calendar-button" type="button">取消</button><button id="countdown-save" class="calendar-button countdown-primary" type="submit">保存</button></div>
+    </form>
+  </dialog>
+  <dialog id="countdown-picker-dialog" class="countdown-dialog countdown-picker-dialog" aria-labelledby="countdown-picker-title">
+    <h2 id="countdown-picker-title">选择目标日期</h2>
+    <div id="countdown-date-picker">
+      <div class="countdown-month-controls"><button id="countdown-month-prev" type="button" class="calendar-button" aria-label="上个月">‹</button><label class="countdown-picker-year-label">年份<input id="countdown-picker-year" type="number" min="1" max="9999" step="1" aria-describedby="countdown-picker-error" /></label><label>月份<select id="countdown-picker-month"></select></label><button id="countdown-month-next" type="button" class="calendar-button" aria-label="下个月">›</button></div>
+      <p id="countdown-month-label" class="calendar-footnote" aria-live="polite"></p>
+      <div class="countdown-weekdays" aria-hidden="true"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
+      <div id="countdown-picker-days" role="grid" aria-label="目标日期日历"></div>
+      <p class="calendar-footnote">点击日期完成选择，也可用方向键移动。</p>
+      <div class="countdown-dialog-actions"><button id="countdown-picker-today" class="calendar-button" type="button">今天</button><button id="countdown-date-picker-cancel" class="calendar-button" type="button">取消</button></div>
+    </div>
+    <div id="countdown-time-picker" hidden>
+      <p class="calendar-footnote">选择小时与分钟，使用 24 小时制。</p>
+      <div class="countdown-time-options"><label>小时<select id="countdown-picker-hour" size="6"></select></label><label>分钟<select id="countdown-picker-minute" size="6"></select></label></div>
+      <div class="countdown-time-shortcuts"><button id="countdown-picker-now" type="button" class="calendar-button">当前时间</button><button id="countdown-picker-no-time" type="button" class="calendar-button">不指定时间</button></div>
+      <div class="countdown-dialog-actions"><button id="countdown-time-picker-cancel" class="calendar-button" type="button">取消</button><button id="countdown-picker-time-apply" class="calendar-button countdown-primary" type="button">确定</button></div>
+    </div>
+    <p id="countdown-picker-error" class="countdown-error" role="alert"></p>
+  </dialog>
+  <dialog id="countdown-delete-dialog" class="countdown-dialog" aria-labelledby="countdown-delete-title" aria-describedby="countdown-delete-description">
+    <h2 id="countdown-delete-title">删除倒计时？</h2><p id="countdown-delete-description"></p><p class="calendar-footnote">删除后无法撤销。</p>
+    <p id="countdown-delete-error" class="countdown-error" role="alert"></p>
+    <div class="countdown-dialog-actions"><button id="countdown-delete-cancel" class="calendar-button" type="button" autofocus>取消</button><button id="countdown-delete-confirm" class="calendar-button countdown-danger" type="button">确认删除</button></div>
+  </dialog>
+  <script src="panel-interaction.js"></script>
+  <script src="calendar-model.js"></script>
+  <script src="app.js"></script>
+  <script src="reminders-model.js"></script>
+  <script src="reminders.js"></script>
+  <script src="countdown-model.js"></script>
+  <script src="countdown-picker.js"></script>
+  <script src="countdown.js"></script>
+</body>
+</html>

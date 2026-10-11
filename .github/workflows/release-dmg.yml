@@ -1,0 +1,46 @@
+name: Verify macOS package (manual only)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  mac:
+    name: Build Apple Silicon DMG
+    runs-on: macos-14
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Resolve release policy
+        id: release
+        run: node scripts/release-policy.js
+      - run: npm ci
+      - run: npm test
+      - name: Build DMG
+        run: npm run build
+      - name: Verify and checksum DMG
+        shell: bash
+        run: |
+          version=$(node -p "require('./package.json').version")
+          codesign --verify --deep --strict 'dist.noindex/mac-arm64/Calendar Notch Dev.app'
+          hdiutil verify "dist.noindex/Calendar-Notch-Dev-${version}-arm64.dmg"
+          cd dist.noindex
+          shasum -a 256 "Calendar-Notch-Dev-${version}-arm64.dmg" > "Calendar-Notch-Dev-${version}-arm64.dmg.sha256"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mac-installer
+          path: |
+            dist.noindex/*.dmg
+            dist.noindex/*.dmg.sha256
+          if-no-files-found: error
+
