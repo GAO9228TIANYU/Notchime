@@ -317,6 +317,8 @@ function requestRendererCollapse() {
 
 function hideWindowAfterCollapse() {
   if (!mainWindow || mainWindow.isDestroyed()) return;
+  // With no Tray, keep the collapsed bar as the recovery/settings entry.
+  if (!tray) { requestRendererCollapse(); return; }
   if (currentMode === 'expanded') {
     hideWhenCollapsed = true;
     requestRendererCollapse();
@@ -493,7 +495,8 @@ function readAppSettings() {
   const stored = readJsonFile(getJsonSettingsPath(APP_SETTINGS_FILE));
   // Preserve unknown fields without enabling any legacy business service.
   return { ...stored, autoCollapseSeconds: normalizeAutoCollapseSeconds(stored.autoCollapseSeconds),
-    reminderMinutes: normalizeReminderMinutes(stored.reminderMinutes) };
+    reminderMinutes: normalizeReminderMinutes(stored.reminderMinutes),
+    menuBarIconVisible: stored.menuBarIconVisible !== false };
 }
 
 function publicAppSettings() {
@@ -501,6 +504,7 @@ function publicAppSettings() {
     autoCollapseSeconds: readAppSettings().autoCollapseSeconds,
     reminderMinutes: readAppSettings().reminderMinutes,
     reminderError: reminderLedger?.error || null,
+    menuBarIconVisible: readAppSettings().menuBarIconVisible,
     autoLaunch: isAutoLaunchEnabled(),
     autoLaunchSupported: autoLaunchSupported(),
     appName: PRODUCT_NAME,
@@ -545,6 +549,9 @@ function refreshTrayMenu() {
     { label: '日程', click: () => requestRendererExpand('calendar') },
     { label: '设置', click: () => requestRendererExpand('settings') },
     { label: mainWindow?.isVisible() ? '隐藏顶部横栏' : '显示顶部横栏', click: toggleVisibility },
+    { label: '隐藏菜单栏图标', click: () => {
+      if (!setMenuBarIconVisible(false).ok) void dialog.showMessageBox(mainWindow, { type: 'error', message: '设置保存失败，菜单栏图标未隐藏。', buttons: ['好'] });
+    } },
     { type: 'separator' },
     { label: '开机自动启动', type: 'checkbox', checked: isAutoLaunchEnabled(),
       enabled: autoLaunchSupported(), click: (item) => {
@@ -559,6 +566,7 @@ function refreshTrayMenu() {
 }
 
 function createTray() {
+  if (tray || !readAppSettings().menuBarIconVisible) return;
   tray = new Tray(createNotchTrayIcon());
   tray.setToolTip(PRODUCT_NAME);
   tray.on('click', () => {
@@ -572,6 +580,24 @@ function createTray() {
   });
   refreshTrayMenu();
 }
+
+function setMenuBarIconVisible(visible) {
+  if (!saveAppSettings({ ...readAppSettings(), menuBarIconVisible: visible })) return { ok: false, error: 'save_failed' };
+  if (visible) createTray();
+  else {
+    tray?.destroy(); tray = null;
+    hideWhenCollapsed = false;
+    if (mainWindow && !mainWindow.isDestroyed() && !mainWindow.isVisible()) mainWindow.showInactive();
+  }
+  const settings = publicAppSettings(); mainWindow?.webContents.send('settings:changed', settings);
+  return { ok: true, settings };
+}
+
+ipcMain.handle('settings:set-menu-bar-icon', (event, visible) => {
+  if (!ownsPanel(event)) return { ok: false, error: 'forbidden' };
+  if (typeof visible !== 'boolean') return { ok: false, error: 'invalid' };
+  return setMenuBarIconVisible(visible);
+});
 
 registerCountdownIPC(ipcMain, { getWindow: () => mainWindow, getStore: getCountdownStore });
 
@@ -921,6 +947,7 @@ app.whenReady().then(() => {
   app.on('activate', () => {
     refreshSystemCalendar();
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
+    else if (!tray && mainWindow && !mainWindow.isVisible()) requestRendererExpand(currentTab);
   });
 });
 

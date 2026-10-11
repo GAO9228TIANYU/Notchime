@@ -46,7 +46,7 @@ require('./fixtures/install-calendar');
 const main = require('../main.js');
 Module._extensions['.js'] = originalLoader;
 ipcMain.handle = originalHandle;
-assert.deepEqual(registrations.sort(), ['window:renderer-ready', 'window:report-state', 'settings:set-reminder-minutes', 'app:about', 'settings:get', 'settings:set-auto-collapse-seconds',
+assert.deepEqual(registrations.sort(), ['window:renderer-ready', 'window:report-state', 'settings:set-reminder-minutes', 'app:about', 'settings:get', 'settings:set-auto-collapse-seconds', 'settings:set-menu-bar-icon',
   'settings:set-auto-launch', 'window:set-mode', 'window:begin-collapse', 'window:set-tab', 'window:metrics',
   'calendar:refresh', 'calendar:request-access', 'calendar:select', 'calendar:open-settings',
   'reminders:refresh', 'reminders:request-access', 'reminders:complete', 'reminders:open-settings',

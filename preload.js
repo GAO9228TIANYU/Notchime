@@ -36,6 +36,7 @@ contextBridge.exposeInMainWorld('notchAPI', {
   getMetrics: () => ipcRenderer.invoke('window:metrics'),
   onMetricsChanged: (cb) => subscribe('window:metrics-changed', cb),
   getAppSettings: () => ipcRenderer.invoke('settings:get'),
+  setMenuBarIconVisible: (visible) => ipcRenderer.invoke('settings:set-menu-bar-icon', visible),
   setAutoLaunch: (enabled) => ipcRenderer.invoke('settings:set-auto-launch', enabled),
   setAutoCollapseSeconds: (seconds) => ipcRenderer.invoke('settings:set-auto-collapse-seconds', seconds),
   onAppSettingsChanged: (cb) => subscribe('settings:changed', cb),

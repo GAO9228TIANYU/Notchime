@@ -32,7 +32,7 @@ test('the Main IPC handlers exactly match the active preload invoke channels', (
   const handlers = [...sources.matchAll(/(?:ipcMain\.handle\(|^)\s*'([a-z-]+:[a-z-]+)'\s*(?:,|:)/gm)].map(match => match[1]).sort();
   const invokes = [...fs.readFileSync(path.join(root, 'preload.js'), 'utf8')
     .matchAll(/ipcRenderer\.invoke\('([^']+)'/g)].map(match => match[1]).sort();
-  assert.equal(handlers.length, 24);
+  assert.equal(handlers.length, 25);
   assert.deepEqual(handlers, invokes);
 });
 test('retired business code cannot restart a poller, capture session or HTTP service', () => {

@@ -66,7 +66,7 @@ const deadline = setTimeout(()=>{console.error('Security GUI timeout');app.exit(
   }
   foreign.destroy();
   const event = {sender:wc,senderFrame:wc.mainFrame};
-  for(const [name,value] of [['window:set-mode',{}],['window:set-tab',{}],['window:begin-collapse','unexpected'],['settings:get','unexpected'],['window:metrics',{}],['settings:set-auto-collapse-seconds',1000],['settings:set-auto-launch',{}],['reminders:complete',{id:'malicious'}],['calendar:select',['bad\n']]]) {
+  for(const [name,value] of [['window:set-mode',{}],['window:set-tab',{}],['window:begin-collapse','unexpected'],['settings:get','unexpected'],['window:metrics',{}],['settings:set-auto-collapse-seconds',1000],['settings:set-auto-launch',{}],['settings:set-menu-bar-icon','false'],['reminders:complete',{id:'malicious'}],['calendar:select',['bad\n']]]) {
     assert.equal((await handlers.get(name)(event,value)).ok,false,name);
   }
   const settingsFile = path.join(profile, 'app-settings.json');
@@ -79,6 +79,8 @@ const deadline = setTimeout(()=>{console.error('Security GUI timeout');app.exit(
     fs.writeFileSync(settingsFile, corrupt);
     assert.equal((await handlers.get('settings:set-auto-collapse-seconds')(event, 8)).ok, false);
     assert.equal((await handlers.get('settings:set-reminder-minutes')(event, 5)).ok, false);
+    assert.equal((await handlers.get('settings:set-menu-bar-icon')(event, false)).ok, false);
+    assert.ok(main.tray(), 'Failed save cannot hide the Tray');
     assert.equal(fs.readFileSync(settingsFile, 'utf8'), corrupt, 'Malformed preferences must be preserved');
   }
   if (settingsBefore) fs.writeFileSync(settingsFile, settingsBefore); else fs.unlinkSync(settingsFile);
@@ -110,5 +112,5 @@ const deadline = setTimeout(()=>{console.error('Security GUI timeout');app.exit(
   }
   const evidence = path.join(__dirname,'../.cache/phase5a');fs.mkdirSync(evidence,{recursive:true});
   fs.writeFileSync(path.join(evidence,'runtime-security.json'),JSON.stringify({ok:true,electron:process.versions.electron,chromium:process.versions.chrome,node:process.versions.node,fixture:true,realEventKitRead:false,channels:handlers.size,remoteAttempts:attempts,checks:['foreign IPC rejected','unknown/write IPC absent','Calendar and Reminders HTML escaped','Node unavailable','network cancelled','geolocation denied','popup/navigation denied','no task/event content in app-owned JSON']},null,2));
-  clearTimeout(deadline);console.log('PASS Electron security regression: isolated Fixture, 24 IPC channels, XSS, session/network, permissions, local storage');app.quit();
+  clearTimeout(deadline);console.log('PASS Electron security regression: isolated Fixture, 25 IPC channels, XSS, session/network, permissions, local storage');app.quit();
 })().catch(error=>{console.error(error);clearTimeout(deadline);app.exit(1);});

@@ -9,6 +9,7 @@
 - ASAR 完整性、Electron Fuses、严格嵌套 ad-hoc 签名；Developer ID 与公证未完成。
 - 显式离线旧数据导入工具及损坏/冲突/幂等测试。
 - 最终验证和限制见 docs/release/notchime-v1.0.0-release-report.md。
+- 本地修订：合并开合动画期间的列表重绘，保留原动画；新增可持久化的菜单栏图标显示开关，隐藏后保留顶部入口。 [验证与限制](docs/ui-motion-menu-bar-fix.md)。
 
 ## [未发布]
 

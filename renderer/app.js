@@ -4,6 +4,9 @@ const notch = document.getElementById('notch');
 const panel = document.getElementById('panel');
 const api = window.notchAPI;
 const TABS = ['calendar', 'settings'];
+const contentMotion = window.PanelInteraction.createMotionWorkQueue();
+window.PanelMotion = Object.freeze({ run: contentMotion.run, isActive: contentMotion.isActive });
+let contentMotionTimer = null;
 const tabButtons = Array.from(document.querySelectorAll('.tab[data-tab]'));
 const tabPanels = Array.from(document.querySelectorAll('.tab-panel'));
 const tabIndicator = document.getElementById('tab-indicator');
@@ -126,6 +129,8 @@ async function setMode(expanded, { source = 'manual' } = {}) {
     reportPanelState(); return;
   }
   modeBusy = true;
+  const contentToken = contentMotion.begin();
+  clearTimeout(contentMotionTimer); contentMotionTimer = null;
   isExpanded = expanded;
   expansionSource = expanded ? source : null;
   if (!expanded || source === 'manual') automaticToken = null;
@@ -135,8 +140,7 @@ async function setMode(expanded, { source = 'manual' } = {}) {
     if (expanded) {
       // Open using the existing motion; Main times only acknowledged automatic reveals.
       await setActiveTab('calendar');
-      renderCalendar();
-      void refreshCalendar();
+      // setActiveTab already refreshes; retain the cached view during motion.
       syncPanelAccessibility(true);
       app.classList.remove('collapsed', 'closing');
       app.classList.add('opening');
@@ -151,6 +155,8 @@ async function setMode(expanded, { source = 'manual' } = {}) {
       await nextAnimationFrame();
       app.classList.remove('opening');
       app.classList.add('expanded');
+      // Only defer list painting. Native/CSS motion and Main timers are untouched.
+      contentMotionTimer = setTimeout(() => contentMotion.end(contentToken), PANEL_MOTION_FALLBACK_MS);
       // 展开后面板从隐藏变为可见，tab 尺寸此时才可量，校准激活胶囊位置
       requestAnimationFrame(() => requestAnimationFrame(positionIndicator));
 
@@ -177,6 +183,7 @@ async function setMode(expanded, { source = 'manual' } = {}) {
     }));
   } finally {
     modeBusy = false;
+    if (!isExpanded || !contentMotionTimer) contentMotion.end(contentToken);
     reportPanelState();
     if (pendingMode !== null) {
       const nextMode = pendingMode;
@@ -350,6 +357,10 @@ async function refreshCalendar() {
   return calendarLoading;
 }
 function renderCalendarSettings() {
+  if (calendarSnapshot.authorization !== 'authorized') renderCalendarSettingsNow();
+  else contentMotion.run('calendar-settings', renderCalendarSettingsNow);
+}
+function renderCalendarSettingsNow() {
   const snapshot = calendarSnapshot;
   document.getElementById('calendar-authorization').textContent = permissionLabels[snapshot.authorization] || '未知授权状态';
   document.getElementById('calendar-authorize').hidden = !['notDetermined', 'writeOnly'].includes(snapshot.authorization);
@@ -376,6 +387,11 @@ function renderCalendarSettings() {
   if (snapshot.authorization === 'authorized' && !snapshot.calendars.length) list.textContent = '系统中没有可用的事件日历。';
 }
 function renderCalendar() {
+  // Revocation/errors clear private content immediately, even during motion.
+  if (calendarSnapshot.authorization !== 'authorized') renderCalendarNow();
+  else contentMotion.run('calendar', renderCalendarNow);
+}
+function renderCalendarNow() {
   const data = window.CalendarModel.createView(calendarSnapshot);
   document.getElementById('calendar-status').textContent = calendarSnapshot.error || (calendarSnapshot.authorization === 'authorized' ? '来自系统日历 · 只读取' : permissionLabels[calendarSnapshot.authorization]) || '无法读取日历';
   document.getElementById('today-count').textContent = `${data.today.length} 项日程`;
@@ -394,12 +410,14 @@ function renderCalendar() {
 }
 
 const launchInput = document.getElementById('settings-auto-launch');
+const menuBarInput = document.getElementById('settings-menu-bar-icon');
 const secondsInput = document.getElementById('settings-auto-collapse');
 const settingsStatus = document.getElementById('settings-status');
 const reminderInput = document.getElementById('settings-reminder-minutes');
 let currentSettings = { reminderMinutes: 10, autoCollapseSeconds: 4, autoLaunch: false, autoLaunchSupported: false };
 function applySettings(settings) {
   currentSettings = { ...currentSettings, ...settings };
+  menuBarInput.checked = currentSettings.menuBarIconVisible !== false;
   launchInput.checked = currentSettings.autoLaunch === true;
   launchInput.disabled = currentSettings.autoLaunchSupported !== true;
   secondsInput.value = currentSettings.autoCollapseSeconds;
@@ -414,6 +432,14 @@ async function refreshSettingsPanel() {
   if (api?.getAppSettings) applySettings(await api.getAppSettings());
   void refreshCalendar();
 }
+menuBarInput.addEventListener('change', () => run((async () => {
+  menuBarInput.disabled = true;
+  try {
+    const result = await api.setMenuBarIconVisible(menuBarInput.checked);
+    if (result.ok) applySettings(result.settings); else menuBarInput.checked = currentSettings.menuBarIconVisible !== false;
+    settingsStatus.textContent = result.ok ? '菜单栏图标设置已保存；可在此重新显示。' : '菜单栏图标设置保存失败，请重试。';
+  } finally { menuBarInput.disabled = false; }
+})()));
 launchInput.addEventListener('change', () => run((async () => {
   const enabled = launchInput.checked;
   launchInput.disabled = true;
@@ -477,4 +503,4 @@ function armCalendarViewClock() {
   calendarViewTimer = setTimeout(() => { renderCalendar(); armCalendarViewClock(); }, 60000 - Date.now() % 60000 + 50);
 }
 armCalendarViewClock();
-window.addEventListener('pagehide', () => clearTimeout(calendarViewTimer), { once: true });
+window.addEventListener('pagehide', () => { clearTimeout(calendarViewTimer); clearTimeout(contentMotionTimer); }, { once: true });

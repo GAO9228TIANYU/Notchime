@@ -69,6 +69,8 @@ const timeout = setTimeout(() => { console.error('Calendar fixture integration t
   window.webContents.debugger.attach('1.3');
   await window.webContents.debugger.sendCommand('Emulation.setTimezoneOverride', { timezoneId: 'UTC' });
   await js('CalendarUI.applySnapshot(CalendarUI.getSnapshot())');
+  // Snapshot transport is immediate; list painting now waits for ongoing island motion.
+  await wait('!PanelMotion.isActive()');
   const clock = await js(`(() => {
     const next = CalendarModel.createView(CalendarUI.getSnapshot()).next;
     return { expected: new Intl.DateTimeFormat('zh-CN', {hour:'2-digit',minute:'2-digit',hour12:false}).format(next.start),

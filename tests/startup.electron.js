@@ -54,7 +54,7 @@ require('./fixtures/install-calendar');
 const main = require('../main.js');
 Module._extensions['.js'] = originalLoader;
 ipcMain.handle = originalHandle;
-assert.deepEqual(registrations.sort(), ['window:renderer-ready', 'window:report-state', 'settings:set-reminder-minutes', 'app:about', 'settings:get', 'settings:set-auto-collapse-seconds',
+assert.deepEqual(registrations.sort(), ['window:renderer-ready', 'window:report-state', 'settings:set-reminder-minutes', 'app:about', 'settings:get', 'settings:set-auto-collapse-seconds', 'settings:set-menu-bar-icon',
   'settings:set-auto-launch', 'window:set-mode', 'window:begin-collapse', 'window:set-tab', 'window:metrics',
   'calendar:refresh', 'calendar:request-access', 'calendar:select', 'calendar:open-settings',
   'reminders:refresh', 'reminders:request-access', 'reminders:complete', 'reminders:open-settings',
@@ -64,6 +64,13 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 (async () => {
   await app.whenReady();
   const window = main.window();
+  const automaticTrace = [];
+  const trace = value => { automaticTrace.push({at:Date.now(),...value}); if (automaticTrace.length>200) automaticTrace.shift(); };
+  const update = main.auto().update.bind(main.auto());
+  main.auto().update = state => { trace({event:'state',expanded:state.expanded,busy:state.busy,source:state.source,hovered:state.hovered}); return update(state); };
+  const setTimer = main.auto().setTimer;
+  main.auto().setTimer = (action,delay) => { trace({event:'timer-armed',delay}); return setTimer(()=>{trace({event:'timer-fired',delay});action();},delay); };
+  process.on('exit',()=>{const dir=path.join(__dirname,'../.cache/ui-smoothness');fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,'startup-states-'+phase+'.json'),JSON.stringify(automaticTrace,null,2));});
   // Establish a separate foreground surface while the startup overview is
   // automatic. Physical typing/clicks must not count as panel takeover. The
   // panel receives normal native focus later for the keyboard/blur assertions.
@@ -100,7 +107,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
       await sleep(20);
     }
     throw new Error('Timeout waiting for ' + name + ': ' + JSON.stringify({ main: main.inspect(), automatic: {state:main.auto().state, session:main.auto().session, timer:!!main.auto().timer}, focused: window.isFocused(),
-      renderer: await js(`({ state: NotchPanel.getState(), classes: document.getElementById('app').className, focus: document.hasFocus(), active: document.activeElement.id, inputs: window.testInputs })`), focusEvents, errors }));
+      renderer: await js(`({ state: NotchPanel.getState(), classes: document.getElementById('app').className, focus: document.hasFocus(), active: document.activeElement.id, inputs: window.testInputs })`), focusEvents, errors, automaticTrace: automaticTrace.slice(-30) }));
   }
   assert.equal(app.getName(), 'Notchime');
   assert.equal(app.getPath('userData'), profile);

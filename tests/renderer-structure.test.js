@@ -24,7 +24,8 @@ test('automatic reveal settings expose only valid reminder choices and explicit 
   assert.match(html, /id="settings-reminder-minutes"/);
   assert.deepEqual([...html.matchAll(/<option value="(\d+)"/g)].map(m => Number(m[1])), [0,5,10,15]);
   const settings = html.slice(html.indexOf('<section id="tab-settings"'), html.indexOf('<dialog id="countdown-editor"'));
-  assert.equal([...settings.matchAll(/type="checkbox"/g)].length, 1);
+  assert.equal([...settings.matchAll(/type="checkbox"/g)].length, 2);
+  assert.match(settings, /id="settings-menu-bar-icon"/);
   assert.match(html, /id="settings-auto-collapse"[^>]*value="4"/);
   assert.match(html, /仅用于自动展开/);
   assert.match(html, /手动操作后保持展开/);

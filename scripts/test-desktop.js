@@ -40,11 +40,11 @@ try {
   }
   const scratch = path.join(root, '.cache', 'tests');
   fs.mkdirSync(scratch, { recursive: true });
-  for (const file of ['appearance', 'notch-focus', 'startup', 'countdown', 'calendar', 'automatic', 'reminders', 'security']) {
+  for (const file of ['appearance', 'notch-focus', 'startup', 'countdown', 'calendar', 'automatic', 'reminders', 'motion-tray', 'security']) {
     const profile = fs.mkdtempSync(path.join(scratch, 'calendar-profile-'));
     env.CALENDAR_TEST_USER_DATA = profile;
     try {
-      for (const phase of ['startup','calendar','automatic'].includes(file) ? ['initial', 'restart'] : file === 'countdown' ? ['crud', 'restart', 'corrupt'] : ['']) {
+      for (const phase of ['startup','calendar','automatic','motion-tray'].includes(file) ? ['initial', 'restart'] : file === 'countdown' ? ['crud', 'restart', 'corrupt'] : ['']) {
         env.CALENDAR_TEST_PHASE = phase;
         const runtimeRoot = path.dirname(require.resolve('electron'));
         const runtime = path.join(runtimeRoot, 'dist', fs.readFileSync(path.join(runtimeRoot, 'path.txt'), 'utf8').trim());

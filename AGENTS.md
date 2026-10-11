@@ -5,7 +5,7 @@
 ## 实际架构
 
 - macOS 13+ Apple Silicon 编译目标；不代表 macOS 13/14 真机全部通过。Electron 44、Node.js 22.12.0+、原生 HTML/CSS/JavaScript，无渲染构建或运行时 npm 依赖。
-- main.js：窗口/多屏/Tray/Hover + Space、登录项、系统生命周期、24项受控 IPC。
+- main.js：窗口/多屏/Tray/Hover + Space、登录项、系统生命周期、25项受控 IPC。
 - main-services.js/preload.js：精确本地页面与主框架来源校验、Chromium权限/远程请求/导航限制、隔离的白名单 API。
 - calendar-bridge.js/calendar-provider.js/calendar-ipc.js：固定 Swift Helper、有限 JSON Lines 请求、EventKit 只读日历、选择/刷新/恢复。测试 Mock 仅在 tests/fixtures；生产错误不得显示 Mock。
 - reminders-provider.js/reminders-ipc.js/native/calendar-helper：今日和逾期未完成 Apple Reminders；唯一写入为用户主动完成当前有效、非重复、可写清单中的事项。不创建或编辑任务，不建本地 Todo 数据库。
@@ -27,7 +27,7 @@
 - 折叠条200px宽，菜单栏高度（0时回退38px），物理顶部居中；展开1240×616，按原屏幕限制。Tab切换不改原生边界。
 - applyMode、beginNativeCollapse、Renderer setMode/waitForPanelMotion、原CSS动画时序。
 - manual/automatic来源、Main→Renderer展开接口、悬停与用户接管保护、去重及退出清理。
-- contextIsolation、sandbox、禁用nodeIntegration、24项IPC来源验证、Helper大小/超时边界与诊断脱敏。
+- contextIsolation、sandbox、禁用nodeIntegration、25项IPC来源验证、Helper大小/超时边界与诊断脱敏。
 - Calendar应用行为只读；macOS14+读取需要Full Access，不称系统Read Only授权。Reminders系统Full Access不等于仅完成权限，代码进一步限制。
 - Countdown/设置/选择/提醒去重数据及未知设置字段。损坏文件不能用默认值静默覆盖。
 

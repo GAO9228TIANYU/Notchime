@@ -8,6 +8,10 @@
   const labels = { loading: '正在读取提醒事项……', notDetermined: '允许访问 Apple Reminders 后，显示今天及已逾期的待办。仅在您点击时标记完成。',
     denied: '提醒事项访问已被拒绝或撤销。可在系统设置中允许；日历和倒计时仍可使用。', restricted: '提醒事项访问受系统限制。', error: '提醒事项暂时不可用，请重新加载。' };
   function render() {
+    if (snapshot.authorization !== 'authorized') renderNow();
+    else window.PanelMotion.run('reminders', renderNow);
+  }
+  function renderNow() {
     const items = snapshot.authorization === 'authorized' ? model.visibleItems(snapshot.items) : [];
     authorize.hidden = snapshot.authorization !== 'notDetermined'; authorize.disabled = accessPending;
     settings.hidden = !['denied','restricted'].includes(snapshot.authorization);
