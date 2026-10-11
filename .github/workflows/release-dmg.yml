@@ -1,4 +1,4 @@
-name: Verify macOS package (manual only)
+name: Verify Notchime ad-hoc RC (manual only; no publishing)
 
 on:
   workflow_dispatch:
@@ -27,18 +27,21 @@ jobs:
       - run: npm ci
       - run: npm test
       - name: Build DMG
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: "false"
         run: npm run build
       - name: Verify and checksum DMG
         shell: bash
         run: |
           version=$(node -p "require('./package.json').version")
-          codesign --verify --deep --strict 'dist.noindex/mac-arm64/Calendar Notch Dev.app'
-          hdiutil verify "dist.noindex/Calendar-Notch-Dev-${version}-arm64.dmg"
+          node scripts/verify-release-bundle.js 'dist.noindex/mac-arm64/Notchime.app'
+          codesign --verify --deep --strict 'dist.noindex/mac-arm64/Notchime.app'
+          hdiutil verify "dist.noindex/Notchime-${version}-arm64.dmg"
           cd dist.noindex
-          shasum -a 256 "Calendar-Notch-Dev-${version}-arm64.dmg" > "Calendar-Notch-Dev-${version}-arm64.dmg.sha256"
+          shasum -a 256 "Notchime-${version}-arm64.dmg" > "Notchime-${version}-arm64.dmg.sha256"
       - uses: actions/upload-artifact@v4
         with:
-          name: mac-installer
+          name: notchime-ad-hoc-release-candidate
           path: |
             dist.noindex/*.dmg
             dist.noindex/*.dmg.sha256

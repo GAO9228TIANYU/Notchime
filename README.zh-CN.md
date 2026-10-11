@@ -6,7 +6,7 @@
   一款隐私优先的 macOS 刘海助手，汇集 Apple Calendar、Reminders 与本地倒计时。</p>
   <p><a href="README.md">English</a> · <strong>简体中文</strong></p>
   <img src="docs/assets/platform-badges.svg" width="508" alt="macOS · Apple Silicon · MIT 源码许可 · 本地优先" />
-  <p><a href="#一眼看清今天">了解功能</a> · <a href="#开始使用">开始使用</a> · <a href="docs/PRIVACY.md#简体中文">隐私说明</a> · <a href="#常见问题">常见问题</a></p>
+  <p><a href="#一眼看清今天">了解功能</a> · <a href="#开始使用">下载与安装</a> · <a href="docs/PRIVACY.md#简体中文">隐私说明</a> · <a href="#常见问题">常见问题</a></p>
 </div>
 
 ![Notchime 实际工作台：本地倒计时、今日日程与 Apple Reminders 待办](docs/assets/notchime-dashboard.png)
@@ -95,24 +95,57 @@ macOS 14+ 中，读取 Calendar 需要系统 **Full Access（完整访问）**�
 
 ## 开始使用
 
-### 当前可用：从源码运行
+### 下载 Notchime 1.0.0 测试候选版
 
-取得可信的项目源码。准备好 Node.js 和 Apple Xcode Command Line Tools 后，在项目根目录打开终端：
+**[下载 Apple Silicon DMG 安装包（Google Drive）](https://drive.google.com/file/d/1JIidJ8UssXWtGOK3YWHOgUAH_S-Ndok2/view?usp=sharing)**
+
+文件：**`Notchime-1.0.0-arm64.dmg`** · 约 **125 MB** · **macOS 13+、Apple Silicon 芯片**。macOS 13/14 真机兼容性尚未验证；此安装包不适用于 Intel Mac。
+
+当前提供的是 **ad-hoc 签名的测试 RC**，尚未使用 Developer ID 签名或通过 Apple 公证。本地包已通过隔离启动和主要功能检查，但 Gatekeeper 检查结果为拒绝；通过互联网下载及 Applications 安装仍需验收。实际验证范围见 [RC 报告](docs/release/notchime-v1.0.0-release-report.md)。
+
+### 安装与首次启动
+
+1. 打开上方 Google Drive 链接，点击页面中的 **下载**，保存 DMG。使用安装包不需要安装 Node.js 或 Xcode。
+2. 双击 DMG，将 **Notchime.app** 拖到窗口内的 **Applications（应用程序）** 图标。如果已有同名应用，先备份，再决定是否替换。
+3. 在 **应用程序 → Notchime** 中启动。应用会出现在屏幕顶部，点击顶部横栏展开；通常不会显示 Dock 图标。
+4. 若 macOS 提示“无法验证开发者”或“Apple 无法检查是否包含恶意软件”，仅在确认来源可信、文件核对无误后继续：先尝试打开，再到 **系统设置 → 隐私与安全性 → 仍要打开**，并在提示中确认 **打开**（仅当系统提供此入口时）。这是针对该应用的例外，不代表 Apple 公证，详见 [Apple 官方说明](https://support.apple.com/en-us/102445)。不要关闭 Gatekeeper，也不要用终端移除隔离属性。若提示应用已损坏或会损害电脑，请停止并反馈。
+5. 安装后的应用启动成功后，推出 DMG。需要开机启动时，在安装到应用程序目录后，进入 Notchime **设置**，勾选 **开机自动启动**。
+
+<details>
+<summary>核对下载文件（可选）</summary>
+
+此前已验收的本地 RC 的 SHA-256 如下。本次文档修改未重新下载 Google Drive 副本进行独立校验：
+
+```text
+aed32944bd98885fbf5a779f9a51d0c75558e729ae91eb49c5b9958a8715579a
+```
+
+在终端输入 `shasum -a 256`，后接下载的 DMG 路径即可核对。相同哈希表示文件字节与本地测试包一致，不代表通过 Apple 公证。若不一致，先核实来源与版本，不要继续运行。
+
+</details>
+
+### 授予日历与提醒事项权限
+
+两项权限需要分别在应用内主动申请：
+
+1. **日历：** 点击顶部横栏展开 → **设置 → 日历 → 允许读取日历**。在 macOS 系统弹窗中亲自确认允许，再勾选希望展示的日历。
+2. **提醒事项：** 打开 **日程** 页面，在 **今天的日程 → 今日待办** 中点击 **允许访问提醒事项**，亲自确认另一项系统授权。授权后显示今天到期及已逾期的未完成事项，不显示未来到期或没有截止日期的事项。
+3. **没有弹窗或此前点过拒绝：** 到 **系统设置 → 隐私与安全性 → 日历／提醒事项**，分别检查并启用 **Notchime** 的访问权限。返回应用，点击 **重新加载** 或 **重新加载待办**。已经授权时，系统可能不会再次弹窗；受单位或学校管理的 Mac 需联系管理员，不要重置权限数据库。
+
+macOS 14+ 的两项系统授权均为 **完整访问（Full Access）**。Notchime 进一步限制实际行为：日历只读取、不创建修改或删除；提醒事项只在你主动点击时完成当前有效、非重复且位于可写清单的事项。拒绝任一授权仍可使用本地倒计时，拒绝提醒事项不会禁用日历；无需摄像头、麦克风或录屏权限。
+
+正式身份为 `com.notchime.app`，使用独立 Notchime 数据目录；旧开发版权限和数据不会自动迁移或删除。倒计时仅保存在本机。iPhone 与 Mac 的同步由 Apple 系统账户负责；内容未出现时，先确认 Mac 自带的日历或提醒事项中已经能看到，无法承诺固定同步时间。
+
+### 另一种方式：从源码运行
+
+准备好 Node.js 和 Apple Xcode Command Line Tools 后，在可信项目源码的根目录打开终端：
 
 ```sh
 npm ci
 npm start
 ```
 
-`npm ci` 安装锁定的开发依赖，并下载 Electron。`npm start` 的 prestart 脚本会在需要时编译并对本地 Swift Helper 进行 **ad-hoc 签名**，随后启动 Electron；不会把应用安装到 Applications。运行前请阅读脚本，编译或签名失败需要解决，不能通过绕过校验来忽略。
-
-在 **设置 → 日历** 中主动申请日历权限并选择要展示的日历；在 **今日待办** 中单独申请 Reminders 权限。拒绝 Reminders 不会禁用日历或本地倒计时。当前源码安装身份仍为 **Calendar Notch Dev**，系统授权窗口可能显示该名称。源码模式不把通用 Electron 登记为登录项。
-
-### 计划中的发布：可下载的 macOS 应用
-
-**目前尚无完成验收的 Notchime 官方 DMG 下载。** 正式身份、签名／公证、Electron fuses、ASAR 完整性、TCC 权限归属及干净安装验收仍待完成。本页不提供虚构的 Homebrew 命令或 Release 地址。
-
-本地 ad-hoc 签名不等于 Developer ID 签名或公证。若将来采用 ad-hoc 分发，需要针对实际构建提供 Gatekeeper 和验证说明。不要为了运行本项目而全局关闭 Gatekeeper。
+`npm ci` 安装锁定开发依赖并下载 Electron。`npm start` 会在需要时先编译并 **ad-hoc 签名本地 Swift Helper**，再启动 Electron；不会将应用安装到 Applications。运行前检查脚本，编译或签名失败需解决，不能绕过校验。源码模式不会把通用 Electron 登记为登录项。
 
 ## 系统要求
 
@@ -157,7 +190,7 @@ npm test
 | `npm run build:zip` | 构建 macOS ZIP。 |
 | `npm run build` | 构建 arm64 macOS DMG，禁止发布。 |
 
-打包脚本均先执行 Helper 构建，再运行已有的 afterPack ad-hoc 签名钩子及最终 strict/deep 校验。输出目录为 `dist.noindex`。目前有已知严格签名阻塞，这些是开发脚本，不是已验收的安装途径。本次文档阶段没有执行它们、签名或生成安装包。
+打包脚本均先执行 Helper 构建，再运行已有的 afterPack ad-hoc 签名钩子及最终 strict/deep 校验。输出目录为 `dist.noindex`。Desktop 输出可能被 File Provider 重新附加 Finder 元数据；RC 使用项目内 APFS 构建卷，严格校验继续生效。Developer ID／公证和最终安装人工验收仍是独立发布条件。
 
 </details>
 
@@ -187,8 +220,8 @@ Windows／Linux 不在支持范围内；Intel 尚无验证过的构建和验收�
 **需要哪些权限？**  
 由你分别主动授予 Calendar 和 Reminders 权限。macOS 14+ 使用完整访问，应用实际操作仍受限制。当前核心功能不请求摄像头、麦克风、录屏或辅助功能权限。
 
-**为什么没有官方 DMG？**  
-正式身份、签名、打包安全及干净安装验证尚未完成。源码及已审查的开发行为不等于已正式发布的安装包。
+**下载的 DMG 已经是 Apple 公证的正式版吗？**  
+不是。上方链接提供 1.0.0 ad-hoc 签名测试 RC；Developer ID、Apple 公证、图标公开再分发权和最终安装／设备验收仍是发布前条件，详见 [RC 报告](docs/release/notchime-v1.0.0-release-report.md)。
 
 ## 贡献与安全报告
 

@@ -46,12 +46,13 @@ const deadline = setTimeout(()=>{console.error('Security GUI timeout');app.exit(
   assert.equal(trayTooltip, 'Notchime');
   Tray.prototype.setToolTip = nativeSetToolTip;
   assert.equal(await js('notchAPI.getAppSettings().then(s=>s.appName)'), 'Notchime');
-  assert.equal(app.getName(), 'Calendar Notch Dev', 'Display copy must not migrate the development identity');
+  assert.equal(app.getName(), 'Notchime', 'Formal application identity matches the product');
   let about; const originalAbout = dialog.showMessageBox;
   dialog.showMessageBox = async (_owner, options) => { about=options; return {response:0}; };
   try { await js('notchAPI.showAbout()'); } finally { dialog.showMessageBox=originalAbout; }
   assert.equal(about.message,'Notchime');
-  for(const text of ['GAO TIANYU','GAO9228TIANYU','tianyu.gaospk@gmail.com','TO-DO Panel v1.2.0','MIT'])assert.ok(about.detail.includes(text));
+  for(const text of ['GAO TIANYU','GAO9228TIANYU','tianyu.gaospk@gmail.com',"There When You Need It. Quiet When You Don't."])assert.ok(about.detail.includes(text));
+  assert.doesNotMatch(about.detail,/TO-DO Panel|xiaopu-ai|Dynamic Panel|Calendar Notch Dev/);
   const foreign = new BrowserWindow({show:false,webPreferences:{preload:path.join(__dirname,'fixtures/security-preload.js'),sandbox:true,contextIsolation:true,nodeIntegration:false}});
   const file = path.join(profile,'attack.html');fs.writeFileSync(file,'<!doctype html><title>Isolated probe</title>');
   await foreign.loadFile(file);

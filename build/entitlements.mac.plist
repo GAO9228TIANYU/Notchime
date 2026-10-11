@@ -4,9 +4,12 @@
 <dict>
   <key>com.apple.security.cs.allow-jit</key>
   <true/>
-  <key>com.apple.security.cs.allow-unsigned-executable-memory</key>
-  <true/>
+  <!-- Local ad-hoc builds have no Team ID; Electron's framework otherwise
+       fails library validation before Main starts. Reassess for Developer ID. -->
   <key>com.apple.security.cs.disable-library-validation</key>
+  <true/>
+  <!-- TCC requires this on the responsible Hardened Runtime application. -->
+  <key>com.apple.security.personal-information.calendars</key>
   <true/>
 </dict>
 </plist>

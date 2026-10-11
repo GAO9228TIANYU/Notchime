@@ -6,7 +6,7 @@
   A privacy-first macOS notch companion for Apple Calendar, Reminders, and Countdown.</p>
   <p><strong>English</strong> · <a href="README.zh-CN.md">简体中文</a></p>
   <img src="docs/assets/platform-badges.svg" width="508" alt="macOS · Apple Silicon · MIT source · Local-first" />
-  <p><a href="#your-day-at-a-glance">Explore</a> · <a href="#get-started">Get started</a> · <a href="docs/PRIVACY.md">Privacy</a> · <a href="#faq">FAQ</a></p>
+  <p><a href="#your-day-at-a-glance">Explore</a> · <a href="#get-started">Download &amp; install</a> · <a href="docs/PRIVACY.md">Privacy</a> · <a href="#faq">FAQ</a></p>
 </div>
 
 ![Notchime's actual dashboard, showing a local countdown, today's Calendar event and an Apple Reminders item](docs/assets/notchime-dashboard.png)
@@ -95,24 +95,57 @@ Read the [privacy notice](docs/PRIVACY.md) for data fields, local storage, permi
 
 ## Get started
 
-### Available now — run from source
+### Download Notchime 1.0.0 — test Release Candidate
 
-Use a trusted copy of this source project. Open a terminal in its root directory after installing Node.js and Apple's Xcode Command Line Tools, then:
+**[Download the Apple Silicon DMG from Google Drive](https://drive.google.com/file/d/1JIidJ8UssXWtGOK3YWHOgUAH_S-Ndok2/view?usp=sharing)**
+
+Package: **`Notchime-1.0.0-arm64.dmg`** · approximately **125 MB** · macOS **13+**, **Apple Silicon**. macOS 13/14 device behavior has not yet been verified; Intel Macs are not supported by this package.
+
+This is a test RC with **ad-hoc signing**, not a Developer ID-signed or Apple-notarized release. The local package passed isolated startup and functional checks; Gatekeeper assessment rejected it. Downloaded-file and Applications installation acceptance are still pending. See the [RC report](docs/release/notchime-v1.0.0-release-report.md) for the exact verification scope.
+
+### Install and launch
+
+1. Open the Google Drive link and use its **Download** button to save the DMG. You do not need Node.js or Xcode to run the packaged app.
+2. Double-click the DMG, then drag **Notchime.app** onto the **Applications** shortcut. If a copy already exists, back it up before deciding whether to replace it.
+3. Open **Applications → Notchime**. The app appears as a small bar at the top of your screen; click it to expand the dashboard. It normally has no Dock icon.
+4. If macOS says the developer cannot be verified or Apple cannot check the app, only proceed if you trust the source and have verified the file. After trying to open it, go to **System Settings → Privacy & Security → Open Anyway**, then confirm **Open**, if macOS offers that option. This creates an exception for this app; it is not notarization. Follow [Apple's guidance](https://support.apple.com/en-us/102445). Do not disable Gatekeeper or remove quarantine attributes with terminal commands. If the warning says the app is damaged or will harm your computer, stop and report it instead.
+5. Once the installed app is running, eject the DMG. For optional startup at login, enable **开机自动启动** in Notchime's **设置** page after installing in Applications.
+
+<details>
+<summary>Check the downloaded file (optional)</summary>
+
+The previously validated local RC has this SHA-256. The Google Drive copy has not been downloaded and independently checked in this documentation update:
+
+```text
+aed32944bd98885fbf5a779f9a51d0c75558e729ae91eb49c5b9958a8715579a
+```
+
+Run `shasum -a 256` followed by the downloaded DMG's path in Terminal. A matching hash confirms that the bytes match the tested local RC; it does not prove Apple notarization. Do not run a mismatching file until its origin/version has been checked.
+
+</details>
+
+### Grant Calendar and Reminders access
+
+The current app interface is Chinese. Calendar and Reminders permissions are separate; grant each through the corresponding button:
+
+1. **Calendar:** expand the top bar → **设置 → 日历 → 允许读取日历** (Settings → Calendar → Allow Calendar access). Personally approve the macOS prompt, then select the calendars you want displayed.
+2. **Reminders:** open **日程**, find **今天的日程 → 今日待办**, and click **允许访问提醒事项** (Allow Reminders access). Personally approve the separate prompt. Notchime shows incomplete reminders due today or overdue; future-due and undated reminders are excluded.
+3. **No prompt or access previously denied?** Open **System Settings → Privacy & Security → Calendars / Reminders** and check the **Notchime** entry for each permission. Return to the app and click **重新加载** or **重新加载待办**. If access is already granted, macOS may not prompt again. Restrictions set by a managed Mac must be handled by its administrator; do not reset the permission database.
+
+On macOS 14+, both use system **Full Access**. Notchime's Calendar code only reads events; the only supported Reminder write is your explicit completion of a current, non-recurring item in a writable list. Declining either permission leaves local Countdown available; declining Reminders does not disable Calendar. No camera, microphone or screen-recording permission is needed.
+
+The release identity is `com.notchime.app`, with an independent Notchime data directory. Old development permissions/data are not automatically migrated or deleted. Countdowns stay on this Mac. Apple account services handle iPhone/Mac sync; if data is missing, check that it is already visible in the Mac's Calendar or Reminders app. Sync has no fixed latency guarantee.
+
+### Alternative — run from source
+
+With Node.js and Apple's Xcode Command Line Tools installed, open a terminal in a trusted copy of the project root:
 
 ```sh
 npm ci
 npm start
 ```
 
-`npm ci` installs the locked development dependencies and downloads Electron. `npm start` runs a prestart script that compiles and **ad-hoc signs the local Swift Helper** when necessary, then launches Electron. It does not install the app into Applications. Inspect the scripts before running them; compilation/signature errors are real failures, not instructions to bypass verification.
-
-In **Settings → Calendar**, request Calendar access and select calendars. In **Today's reminders**, request Reminders access separately. Denying Reminders does not disable Calendar or local Countdown. The current source identity remains **Calendar Notch Dev**; that name may appear in system permission prompts. Source mode does not register the generic Electron app as a login item.
-
-### Planned release — a downloadable macOS app
-
-**There is no validated official Notchime DMG download yet.** Formal app identity, signing/notarization, Electron fuses, ASAR integrity, TCC ownership and clean-install acceptance remain release work. No Homebrew installation or release URL is advertised here.
-
-A local ad-hoc signature is not Developer ID signing or notarization. If a future distribution uses ad-hoc signing, it will need explicit Gatekeeper and verification guidance for that exact build. Do not globally disable Gatekeeper to run this project.
+`npm ci` installs the locked development dependencies and downloads Electron. `npm start` first compiles and **ad-hoc signs the local Swift Helper** when needed, then launches Electron; it does not install the app in Applications. Inspect the scripts before running them, and resolve compilation/signature failures rather than bypassing verification. Source mode does not register the generic Electron app as a login item.
 
 ## System requirements
 
@@ -157,7 +190,7 @@ npm test
 | `npm run build:zip` | Build a macOS ZIP. |
 | `npm run build` | Build an arm64 macOS DMG with publishing disabled. |
 
-All packaging scripts first run the Helper build and then the existing afterPack ad-hoc signing hook, including final strict/deep signature verification. Outputs target `dist.noindex`. There is a known strict-signing blocker; these are developer scripts, not a validated installation route. This documentation phase did not run them, sign anything or produce an installer.
+All packaging scripts first run the Helper build and then the existing afterPack ad-hoc signing hook, including final strict/deep signature verification. Outputs target `dist.noindex`. File Provider may reattach Finder metadata on Desktop outputs; the RC uses a project-local APFS build volume and retains strict validation. Developer ID signing/notarization and final user installation acceptance remain separate release gates.
 
 </details>
 
@@ -187,8 +220,8 @@ No. The app uses Electron with a native Swift EventKit Helper.
 **What permissions are required?**  
 Separate Calendar and Reminders access, only when you choose to grant them. On macOS 14+ these are Full Access; the application's operations remain limited. Camera, microphone, screen-recording and accessibility access are not requested for the current core features.
 
-**Why is there no official DMG yet?**  
-Final identity, signing, packaging security and clean-install validation have not been completed. The source and audited development behavior should not be mistaken for a released installer.
+**Is the downloadable DMG an official notarized release?**  
+No. The linked 1.0.0 DMG is a test RC with ad-hoc signing. Developer ID signing, Apple notarization, public artwork redistribution rights and final installation/device acceptance remain release gates; see the [RC report](docs/release/notchime-v1.0.0-release-report.md).
 
 ## Contributing and security
 

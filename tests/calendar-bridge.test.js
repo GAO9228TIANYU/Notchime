@@ -40,8 +40,8 @@ test('shutdown rejects pending requests, kills process and prevents restarting',
   const {bridge,children}=setup(t);const p=bridge.request('status');bridge.close();await assert.rejects(p,{code:'closed'});assert.equal(children[0].killed,true);await assert.rejects(bridge.request('status'),{code:'closed'});
 });
 test('helper executable path is fixed by Main and differs correctly in packaged mode',()=>{
-  assert.match(helperPath({isPackaged:false}), /\.cache\/native\/CalendarNotchCalendarHelper\.app\/Contents\/MacOS\/calendar-helper$/);
-  const previous=process.resourcesPath;process.resourcesPath='/fixed/Resources';assert.equal(helperPath({isPackaged:true}),'/fixed/Resources/native/CalendarNotchCalendarHelper.app/Contents/MacOS/calendar-helper');if(previous===undefined)delete process.resourcesPath;else process.resourcesPath=previous;
+  assert.match(helperPath({isPackaged:false}), /\.cache\/native\/NotchimeEventKitHelper\.app\/Contents\/MacOS\/notchime-eventkit-helper$/);
+  const previous=process.resourcesPath;process.resourcesPath='/fixed/Resources';assert.equal(helperPath({isPackaged:true}),'/fixed/Resources/native/NotchimeEventKitHelper.app/Contents/MacOS/notchime-eventkit-helper');if(previous===undefined)delete process.resourcesPath;else process.resourcesPath=previous;
 });
 
 test('null, arrays and primitive protocol messages reject safely without throwing in Main', async t => {

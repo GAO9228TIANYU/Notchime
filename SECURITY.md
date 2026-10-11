@@ -22,7 +22,7 @@ Calendar writes are not supported. Reminders writing is limited to validated, us
 
 The [Phase 5A audit](docs/phase5a-privacy-security-audit.md) and [Phase 5B review](docs/phase5b-final-code-review.md) record source checks and development regressions. They do not certify every dependency path, OS version or future binary.
 
-Formal identity, signing/notarization, Electron fuses, ASAR integrity, packaged TCC ownership and clean-install behavior remain release checks. The previous dependency review reported eight Moderate findings in development tooling; that is historical evidence, not a promise that a current vulnerability database returns the same result. Review the final locked graph and shipped components before distribution. A known strict-signature validation failure must not be bypassed.
+The 1.0.0 RC unifies formal identity and checks ASAR, compatible fuses, nested ad-hoc signatures and isolated package behavior. Developer ID/notarization, new-user TCC and final installation/device acceptance remain release gates. The previous dependency review reported eight Moderate findings in development tooling; that is historical evidence, not a promise that a current vulnerability database returns the same result. Review the final locked graph and shipped components before distribution. Strict-signature validation failures must not be bypassed; project-local APFS staging addresses observed File Provider metadata races.
 
 See [Privacy](docs/PRIVACY.md) for system sync, persistence and diagnostic limits. Do not globally disable Gatekeeper, reset TCC or weaken application protections as part of a security reproduction.
 
@@ -52,6 +52,6 @@ Calendar 不提供写入接口；Reminders 仅允许用户主动完成当前有�
 
 [Phase 5A 审计](docs/phase5a-privacy-security-audit.md)及 [Phase 5B 审查](docs/phase5b-final-code-review.md)记录了源码检查和开发回归，不能认证所有依赖路径、系统版本或未来二进制。
 
-正式身份、签名/公证、Electron fuses、ASAR 完整性、打包后 TCC 归属和干净安装仍待验证。此前依赖审查记录了开发工具链的 8 项 Moderate 问题，这是历史结果，不代表最新漏洞数据库仍给出相同数量。分发前应复核最终锁定依赖及实际随包组件。已知严格签名校验失败不能绕过。
+1.0.0 RC 已统一正式身份，检查 ASAR、兼容 Fuses、嵌套 ad-hoc 签名和隔离包运行。Developer ID／公证、新用户 TCC 和最终安装／设备验收仍是发布条件。此前依赖审查记录了开发工具链的 8 项 Moderate 问题，这是历史结果，不代表最新漏洞数据库仍给出相同数量。分发前应复核最终锁定依赖及实际随包组件。严格签名校验失败不能绕过；项目内 APFS 构建卷用于规避 File Provider 元数据竞态。
 
 [隐私说明](docs/PRIVACY.md#简体中文)解释了系统同步、存储和诊断边界。复现安全问题时，不要全局关闭 Gatekeeper、重置 TCC 或削弱应用保护。

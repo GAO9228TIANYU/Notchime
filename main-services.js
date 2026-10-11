@@ -52,4 +52,9 @@ function notificationTimerDelay(delayMs) {
   return Math.min((2 ** 31) - 1, Math.max(250, normalizedDelay));
 }
 
-module.exports = { isPanelSender, PANEL_URL, installLocalSessionGuards, installLocalWebContentsGuards, hoverSpacePollingPolicy, notificationTimerDelay };
+function shouldCollapseOnBlur({ authorizationActive = false, source = null } = {}) {
+  // Inactive automatic reveals retain their session when macOS restores focus
+  // during opening. Their existing timer/hover rules own the collapse.
+  return !authorizationActive && source !== 'automatic';
+}
+module.exports = { isPanelSender, PANEL_URL, installLocalSessionGuards, installLocalWebContentsGuards, hoverSpacePollingPolicy, notificationTimerDelay, shouldCollapseOnBlur };

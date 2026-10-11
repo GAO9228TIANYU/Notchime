@@ -7,11 +7,11 @@ const root = path.resolve(__dirname, '..');
 const config = require('../package.json');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 
-test('product copy and current maintainer are distinct from preserved development identity', () => {
+test('product copy and current maintainer are consistent with the formal release identity', () => {
   assert.deepEqual(config.author, {name:'GAO TIANYU',email:'tianyu.gaospk@gmail.com',url:'https://github.com/GAO9228TIANYU'});
-  assert.equal(config.build.productName, 'Calendar Notch Dev');
-  assert.equal(config.build.appId, 'com.calendarnotch.dev');
-  assert.match(read('main.js'), /const APP_NAME = 'Calendar Notch Dev'/);
+  assert.equal(config.build.productName, 'Notchime');
+  assert.equal(config.build.appId, 'com.notchime.app');
+  assert.match(read('main.js'), /const APP_NAME = 'Notchime'/);
   assert.match(read('main.js'), /const PRODUCT_NAME = 'Notchime'/);
   assert.match(read('main.js'), /appName: PRODUCT_NAME/);
   assert.match(read('renderer/index.html'), /<title>Notchime<\/title>/);
@@ -37,7 +37,7 @@ test('application sources are explicit and exclude tests, private evidence and h
   for (const file of positive) { assert.ok(fs.existsSync(path.join(root,file))); assert.doesNotMatch(file,/^(?:docs|tests|promo|\.cache|\.claude)\//); }
   assert.ok(config.build.files.includes('!{.cache,.claude,docs,promo,tests,scripts}/**'));
   assert.equal(config.build.extraResources.filter(e=>e.from.startsWith('.cache')).length,1);
-  assert.equal(config.build.extraResources[0].from,'.cache/native/CalendarNotchCalendarHelper.app');
+  assert.equal(config.build.extraResources[0].from,'.cache/native/NotchimeEventKitHelper.app');
 });
 
 test('supplied icon is a structurally valid ICNS and old build icon is no longer active', () => {

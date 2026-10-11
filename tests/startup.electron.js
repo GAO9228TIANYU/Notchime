@@ -64,6 +64,16 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 (async () => {
   await app.whenReady();
   const window = main.window();
+  // Establish a separate foreground surface while the startup overview is
+  // automatic. Physical typing/clicks must not count as panel takeover. The
+  // panel receives normal native focus later for the keyboard/blur assertions.
+  const foreground = new BrowserWindow({ width: 180, height: 80, show: true });
+  app.focus({ steal: true }); foreground.focus();
+  const foregroundDeadline = Date.now() + 2000;
+  while (!foreground.isFocused() && Date.now() < foregroundDeadline) {
+    app.focus({ steal: true }); foreground.focus(); await sleep(25);
+  }
+  assert.equal(foreground.isFocused(), true, 'startup foreground isolation must be established');
   if (window.webContents.isLoading()) await new Promise(r => window.webContents.once('did-finish-load', r));
   await sleep(350);
   const js = script => window.webContents.executeJavaScript(script);
@@ -92,19 +102,20 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     throw new Error('Timeout waiting for ' + name + ': ' + JSON.stringify({ main: main.inspect(), automatic: {state:main.auto().state, session:main.auto().session, timer:!!main.auto().timer}, focused: window.isFocused(),
       renderer: await js(`({ state: NotchPanel.getState(), classes: document.getElementById('app').className, focus: document.hasFocus(), active: document.activeElement.id, inputs: window.testInputs })`), focusEvents, errors }));
   }
-  assert.equal(app.getName(), 'Calendar Notch Dev');
+  assert.equal(app.getName(), 'Notchime');
   assert.equal(app.getPath('userData'), profile);
   assert.equal(window.isVisible(), true); assert.equal(window.isAlwaysOnTop(), true);
   if (process.platform === 'darwin') assert.equal(window.isVisibleOnAllWorkspaces(), true);
   const preferences = window.webContents.getLastWebPreferences();
   assert.equal(preferences.contextIsolation, true); assert.equal(preferences.sandbox, true); assert.equal(preferences.nodeIntegration, false);
   await waitMode('expanded');
-  assert.equal(await js('NotchPanel.getState().source'), 'automatic', 'startup automatically reveals once');
+  assert.equal(await js('NotchPanel.getState().source'), 'automatic', 'startup automatically reveals once: ' + JSON.stringify(await js('window.testInputs')));
   window.webContents.sendInputEvent({type:'mouseMove',x:-80,y:-80});
   window.webContents.sendInputEvent({type:'mouseLeave',x:-80,y:-80});
   await sleep(100);
   assert.equal(await js("document.getElementById('panel').matches(':hover')"), false, 'pointer must actually leave the automatic panel');
   await waitMode('collapsed');
+  foreground.destroy();
   const collapsedBounds = window.getBounds(); assert.equal(collapsedBounds.width, 200);
   if (process.platform === 'darwin') {
     const external = { bounds: { x: -1920, y: -200, width: 1920, height: 1080 }, workArea: { x: -1920, y: -172, width: 1920, height: 1052 } };

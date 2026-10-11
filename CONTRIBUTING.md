@@ -28,7 +28,7 @@ npm ci
 npm start
 ```
 
-Dependency installation downloads packages and Electron. `npm start` first runs `scripts/build-calendar-helper.js`, which may compile and ad-hoc sign the local Helper, and strictly verifies newly built output; unchanged builds reuse the cache. This is a development launch, not an installed, Developer ID-signed or notarized release. Do not bypass a verification failure. The current application identity remains Calendar Notch Dev; do not change Bundle ID, userData or TCC identity as an incidental fix.
+Dependency installation downloads packages and Electron. `npm start` first runs `scripts/build-calendar-helper.js`, which may compile and ad-hoc sign the local Helper, and strictly verifies newly built output; unchanged builds reuse the cache. This is a development launch, not an installed, Developer ID-signed or notarized release. Do not bypass a verification failure. The Release Candidate identity is Notchime 1.0.0 (`com.notchime.app`); do not change Bundle ID, userData or TCC identity as an incidental fix. Old profile imports require explicit confirmation and both apps to be closed.
 
 ## Module map
 
@@ -101,7 +101,7 @@ npm ci
 npm start
 ```
 
-安装依赖会下载软件包和 Electron。`npm start` 首先运行 `scripts/build-calendar-helper.js`，可能编译并 ad-hoc 签名本地 Helper，对新构建进行严格签名校验，无变化时复用缓存。这是开发启动，不是正式安装、Developer ID 签名或公证发布。校验失败不得绕过。当前身份仍是 Calendar Notch Dev，不要为普通修复顺带修改 Bundle ID、userData 或 TCC 身份。
+安装依赖会下载软件包和 Electron。`npm start` 首先运行 `scripts/build-calendar-helper.js`，可能编译并 ad-hoc 签名本地 Helper，对新构建进行严格签名校验，无变化时复用缓存。这是开发启动，不是正式安装、Developer ID 签名或公证发布。校验失败不得绕过。Release Candidate 身份为 Notchime 1.0.0（`com.notchime.app`），不要为普通修复顺带修改 Bundle ID、userData 或 TCC 身份。旧数据只通过明确确认的离线导入处理，操作前关闭新旧应用。
 
 ### 模块与测试
 

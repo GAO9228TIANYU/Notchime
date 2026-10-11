@@ -4,13 +4,13 @@ const path = require('node:path');
 const fs = require('node:fs');
 const { randomUUID } = require('node:crypto');
 const zlib = require('node:zlib');
-const { installLocalWebContentsGuards, installLocalSessionGuards, isPanelSender, hoverSpacePollingPolicy } = require('./main-services');
+const { installLocalWebContentsGuards, installLocalSessionGuards, isPanelSender, hoverSpacePollingPolicy, shouldCollapseOnBlur } = require('./main-services');
 
-// Separate development identity. Never migrate or read the original profile.
+// Formal identity uses an independent profile. Never automatically read old profiles.
 const { AutomaticReveal, LifecycleRevealCoordinator, validPanelState, waitForCalendar } = require('./automatic-reveal');
 const { ReminderLedger, CalendarReminderScheduler, reminderFor } = require('./calendar-reminders');
-const APP_NAME = 'Calendar Notch Dev';
-// Product copy is independent of the existing development/TCC/data identity.
+const APP_NAME = 'Notchime';
+// Application, product and system permission identities agree.
 const PRODUCT_NAME = 'Notchime';
 const APP_VERSION = require('./package.json').version;
 const { RemindersProvider } = require('./reminders-provider');
@@ -380,7 +380,8 @@ function createWindow() {
 
   // 失焦时让渲染层走完整退场动画，再由渲染层请求缩小原生窗口。
   mainWindow.on('blur', () => {
-    if (calendarAuthorizationActive) return;
+    if (!shouldCollapseOnBlur({ authorizationActive: calendarAuthorizationActive,
+      source: automaticReveal?.session ? 'automatic' : automaticReveal?.state.source })) return;
     automaticReveal?.cancel();
     requestRendererCollapse();
   });
@@ -514,7 +515,7 @@ function saveAppSettings(settings) {
 function showAbout() {
   return dialog.showMessageBox(mainWindow, {
     type: 'info', title: `关于 ${PRODUCT_NAME}`, message: PRODUCT_NAME,
-    detail: `There When You Need It. Quiet When You Don't.\n需要时出现，无需时静默。\n版本 ${APP_VERSION} · EventKit\n开发与维护：GAO TIANYU\nhttps://github.com/GAO9228TIANYU\ntianyu.gaospk@gmail.com\n\n日历只读；Apple Reminders 仅主动标记完成；倒计时本地保存。\n开源来源：TO-DO Panel v1.2.0（xiaopu-ai / contributors，MIT）。\n完整上游版权与许可见随附 LICENSE / NOTICE。`,
+    detail: `There When You Need It. Quiet When You Don't.\n需要时出现，无需时静默。\n版本 ${APP_VERSION} · EventKit\n开发与维护：GAO TIANYU\nhttps://github.com/GAO9228TIANYU\ntianyu.gaospk@gmail.com\n\n日历只读；Apple Reminders 仅主动标记完成；倒计时本地保存。`,
     buttons: ['好'], noLink: true,
   });
 }
@@ -891,6 +892,15 @@ function initializeCalendarPresentation() {
 
 app.whenReady().then(() => {
   if (!gotTheLock) return;
+  Menu.setApplicationMenu(Menu.buildFromTemplate([
+    { label: PRODUCT_NAME, submenu: [
+      { label: `关于 ${PRODUCT_NAME}`, click: showAbout },
+      { type: 'separator' }, { role: 'hide', label: `隐藏 ${PRODUCT_NAME}` },
+      { role: 'hideOthers' }, { role: 'unhide' },
+      { type: 'separator' }, { role: 'quit', label: `退出 ${PRODUCT_NAME}` },
+    ] },
+    { role: 'editMenu' },
+  ]));
   if (process.platform === 'darwin' && app.dock) app.dock.hide();
   ensureFirstRunAutoLaunch();
   initializeCalendarPresentation();

@@ -67,6 +67,13 @@ if(window.webContents.isLoading())await new Promise(r=>window.webContents.once('
    assert.equal(await js('notchAPI.getAppSettings().then(s=>s.reminderMinutes)'),5);
    assert.equal(await js('notchAPI.listCountdowns().then(r=>r.items.length)'),1);
  } else {
+   // A native blur can arrive after Main requests expansion but before Renderer
+   // changes native bounds. It must not orphan the automatic session.
+   assert.equal(main.auto().request({kind:'overview'}),true);
+   const blurSession=main.auto().session;
+   window.emit('blur');assert.equal(main.auto().session,blurSession);
+   await expanded();window.emit('blur');assert.equal(main.auto().session,blurSession);
+   await leave();await collapsed();assert.equal(main.auto().session,null);
    assert.equal(await js('notchAPI.getAppSettings().then(s=>s.reminderMinutes)'),10);
    assert.equal(await js('notchAPI.reportPanelState({expanded:true,busy:false,source:"automatic",hovered:false,tab:"calendar",token:"not-valid"}).then(r=>r.ok)'),false);
    assert.equal(await js('notchAPI.setReminderMinutes(1).then(r=>r.ok)'),false);

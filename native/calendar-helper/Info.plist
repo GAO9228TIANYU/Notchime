@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0"><dict>
-<key>CFBundleIdentifier</key><string>com.calendarnotch.dev.calendar-helper</string>
-<key>CFBundleName</key><string>Calendar Notch Calendar</string>
-<key>CFBundleDisplayName</key><string>Calendar Notch 日历读取</string>
-<key>CFBundleExecutable</key><string>calendar-helper</string>
+<key>CFBundleIdentifier</key><string>com.notchime.app.eventkit-helper</string>
+<key>CFBundleName</key><string>Notchime EventKit</string>
+<key>CFBundleDisplayName</key><string>Notchime EventKit</string>
+<key>CFBundleExecutable</key><string>notchime-eventkit-helper</string>
 <key>CFBundlePackageType</key><string>APPL</string>
-<key>CFBundleVersion</key><string>1</string>
+<key>CFBundleVersion</key><string>1.0.0</string>
+<key>CFBundleShortVersionString</key><string>1.0.0</string>
 <key>LSMinimumSystemVersion</key><string>13.0</string>
 <key>LSUIElement</key><true/>
-<key>NSCalendarsUsageDescription</key><string>Calendar Notch 读取您选择的系统日历，展示今天及未来 7 天的日程。应用不会创建、修改或删除日程。</string>
-<key>NSCalendarsFullAccessUsageDescription</key><string>macOS 要求完整日历访问才能读取日程。Calendar Notch 只读取您选择的日历，不会创建、修改或删除日程。</string>
+<key>NSCalendarsUsageDescription</key><string>Notchime 读取您选择的系统日历，展示今天及未来 7 天的日程。应用不会创建、修改或删除日程。</string>
+<key>NSCalendarsFullAccessUsageDescription</key><string>macOS 要求完整日历访问才能读取日程。Notchime 只读取您选择的日历，不会创建、修改或删除日程。</string>
 <key>NSRemindersUsageDescription</key><string>展示今天及已逾期的待办，仅在您主动点击时标记完成，不创建、编辑或删除提醒事项。</string>
 <key>NSRemindersFullAccessUsageDescription</key><string>macOS 要求完整提醒事项访问。应用只展示今天及已逾期的待办，仅在您主动点击时标记完成，不创建、编辑或删除事项。</string>
 </dict></plist>

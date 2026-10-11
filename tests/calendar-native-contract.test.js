@@ -20,10 +20,10 @@ test('main and native bundles declare correct usage strings, IDs, fixed resource
     assert.match(plist, new RegExp(`<key>${key}</key>`)); assert.equal(typeof config.build.mac.extendInfo[key], 'string');
   }
   assert.doesNotMatch(plist, /NSMicrophone|NSCamera|NSContacts|NSAppleEvents/);
-  assert.match(plist, /com.calendarnotch.dev.calendar-helper/);
+  assert.match(plist, /com.notchime.app.eventkit-helper/);
   assert.match(plist, /<key>LSMinimumSystemVersion<\/key><string>13.0<\/string>/);
   assert.deepEqual(config.build.extraResources, [
-    { from: '.cache/native/CalendarNotchCalendarHelper.app', to: 'native/CalendarNotchCalendarHelper.app' },
+    { from: '.cache/native/NotchimeEventKitHelper.app', to: 'native/NotchimeEventKitHelper.app' },
     { from: 'node_modules/electron/dist/LICENSE', to: 'licenses/electron/LICENSE' },
     { from: 'node_modules/electron/dist/LICENSES.chromium.html', to: 'licenses/electron/LICENSES.chromium.html' },
   ]);

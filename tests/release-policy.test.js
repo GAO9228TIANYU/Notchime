@@ -95,6 +95,7 @@ test('macOS packaging declares the Electron 44 minimum and least-privilege runti
   assert.doesNotMatch(entitlements, /com\.apple\.security\.cs\.disable-executable-page-protection/);
   assert.match(entitlements, /com\.apple\.security\.cs\.allow-jit/);
   assert.match(entitlements, /com\.apple\.security\.cs\.disable-library-validation/);
+  assert.doesNotMatch(entitlements, /com\.apple\.security\.cs\.allow-unsigned-executable-memory/);
 });
 
 test('macOS development packaging contains only active modules and no retired permissions', () => {

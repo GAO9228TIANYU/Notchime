@@ -24,11 +24,11 @@ On macOS 14 and later, EventKit reading uses **Full Access to Events** and **Ful
 
 The current core features do not request camera, microphone, screen-recording, accessibility, Apple Events automation or Full Disk Access. Normal app file access and OS/runtime behavior should not be confused with a promise that no system resource is ever used.
 
-To revoke access, open **System Settings → Privacy & Security → Calendars / Reminders**, and disable the relevant application entry. The development app or Helper may appear under the current **Calendar Notch Dev** identity. Return to Notchime and reload; unavailable access clears the corresponding in-memory snapshot. Calendar reminder scheduling stops when Calendar access is unavailable. You do not need to reset the TCC database or globally disable macOS protections.
+To revoke access, open **System Settings → Privacy & Security → Calendars / Reminders**, and disable the relevant application entry. The Release Candidate uses **Notchime** (`com.notchime.app`); the separate native Helper is Notchime EventKit. Old development grants are not transferred or reset. Return to Notchime and reload; unavailable access clears the corresponding in-memory snapshot. Calendar reminder scheduling stops when Calendar access is unavailable. You do not need to reset the TCC database or globally disable macOS protections.
 
 ## What is saved locally
 
-Application-managed files use Electron's `app.getPath('userData')`. The current development identity defaults to `~/Library/Application Support/Calendar Notch Dev`; formal Notchime identity and any migration are pending work.
+Application-managed files use Electron's `app.getPath('userData')`. Notchime 1.0.0 defaults to `~/Library/Application Support/Notchime`. Old development data is left in place and is never automatically read/imported. Explicit offline import requires a confirmed source backup and a nonexistent target, preserves original data, and refuses corrupt files or conflicts.
 
 | File | Purpose |
 |---|---|
@@ -62,7 +62,7 @@ Do not send unredacted userData, Calendar/Reminders exports, account names or sc
 
 ## Evidence and limits
 
-The [Phase 5A security audit](phase5a-privacy-security-audit.md) and [Phase 5B code review](phase5b-final-code-review.md) record the source and development test evidence. User acceptance covers system sync on the development machine; automated Fixture tests do not prove iCloud behavior. Final signing, packaging integrity, permission ownership, clean installation and older-OS validation remain release gates.
+The [Phase 5A security audit](phase5a-privacy-security-audit.md) and [Phase 5B code review](phase5b-final-code-review.md) record the source and development test evidence. User acceptance covers system sync on the development machine; automated Fixture tests do not prove iCloud behavior. The [1.0.0 RC report](release/notchime-v1.0.0-release-report.md) separately records actual package integrity, ad-hoc signatures and user-granted permissions in isolated packaged runs. Developer ID/notarization, clean Applications/download acceptance and older-OS validation remain release gates.
 
 No audit establishes absolute security or rules out every future dependency or operating-system issue. Report privacy or security concerns privately using [SECURITY.md](../SECURITY.md).
 
@@ -94,11 +94,11 @@ macOS 14 及更新系统上，EventKit 读取日历需要 **Full Access to Event
 
 当前核心功能不申请摄像头、麦克风、屏幕录制、辅助功能、Apple Events 自动化或完全磁盘访问权限。正常文件访问及系统、框架行为不等于应用承诺不使用任何系统资源。
 
-可在 **系统设置 → 隐私与安全性 → 日历 / 提醒事项** 中撤销相关访问。开发应用或 Helper 可能显示为当前 **Calendar Notch Dev** 身份。返回应用重新加载后，不可用权限对应的内存快照会被清空；日历权限不可用时，日程提醒调度停止。不需要重置 TCC 数据库或全局关闭 macOS 安全保护。
+可在 **系统设置 → 隐私与安全性 → 日历 / 提醒事项** 中撤销相关访问。Release Candidate 使用 **Notchime**（`com.notchime.app`）及 Notchime EventKit Helper；旧开发身份的授权不迁移或重置。返回应用重新加载后，不可用权限对应的内存快照会被清空；日历权限不可用时，日程提醒调度停止。不需要重置 TCC 数据库或全局关闭 macOS 安全保护。
 
 ### 本机保存什么
 
-应用管理的文件使用 Electron 的 `app.getPath('userData')`。当前开发身份默认目录为 `~/Library/Application Support/Calendar Notch Dev`；正式身份及可能的数据迁移仍属于后续工作。
+应用管理的文件使用 Electron 的 `app.getPath('userData')`。Notchime 1.0.0 默认使用 `~/Library/Application Support/Notchime`。旧开发数据留在原处，不自动读取或导入；明确确认的离线导入仅接受来源备份和不存在的目标，保留原数据，损坏文件或目标冲突时拒绝执行。
 
 | 文件 | 用途 |
 |---|---|
@@ -132,6 +132,6 @@ Notchime 不承诺系统、开发工具和依赖的所有路径都没有网络�
 
 ### 证据与限制
 
-[Phase 5A 安全审计](phase5a-privacy-security-audit.md)及 [Phase 5B 代码审查](phase5b-final-code-review.md)记录了源码和开发测试依据。用户验收覆盖开发机器上的系统同步；自动化 Fixture 不能证明 iCloud 行为。最终签名、包完整性、权限归属、干净安装和较旧系统验证仍是发布前检查项。
+[Phase 5A 安全审计](phase5a-privacy-security-audit.md)及 [Phase 5B 代码审查](phase5b-final-code-review.md)记录了源码和开发测试依据。用户验收覆盖开发机器上的系统同步；自动化 Fixture 不能证明 iCloud 行为。[1.0.0 RC 报告](release/notchime-v1.0.0-release-report.md)另行记录真实包完整性、ad-hoc 签名及隔离包运行中用户亲自授权的结果。Developer ID／公证、Applications／下载干净安装和较旧系统验证仍是发布前检查项。
 
 审计不代表绝对安全，也无法排除未来依赖或操作系统问题。隐私和安全问题请按 [SECURITY.md](../SECURITY.md#简体中文) 私下报告。

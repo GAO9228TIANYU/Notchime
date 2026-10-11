@@ -34,8 +34,8 @@ test('calendar package identity cannot overlap the original product', () => {
   const lock = require('../package-lock.json');
   assert.equal(config.name, lock.name);
   assert.equal(config.name, lock.packages[''].name);
-  assert.equal(config.build.appId, 'com.calendarnotch.dev');
-  assert.equal(config.build.productName, 'Calendar Notch Dev');
-  assert.equal(config.build.mac.extendInfo.CFBundleDisplayName, config.build.productName);
+  assert.equal(config.build.appId, 'com.notchime.app');
+  assert.equal(config.build.productName, 'Notchime');
+  assert.equal(config.build.mac.extendInfo.CFBundleDisplayName, 'Notchime');
   assert.equal(config.version, lock.version);
 });

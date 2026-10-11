@@ -1,6 +1,6 @@
 {
-  "name": "calendar-notch-dev",
-  "version": "1.2.0",
+  "name": "notchime",
+  "version": "1.0.0",
   "description": "Notchime — There When You Need It. Quiet When You Don't.",
   "main": "main.js",
   "author": {
@@ -27,11 +27,11 @@
     "electron-builder": "^26.15.7"
   },
   "build": {
-    "appId": "com.calendarnotch.dev",
-    "productName": "Calendar Notch Dev",
-    "artifactName": "Calendar-Notch-Dev-${version}-${arch}.${ext}",
-    "copyright": "© 2026 GAO TIANYU; portions © 2026 TO-DO Panel contributors",
-    "asar": false,
+    "appId": "com.notchime.app",
+    "productName": "Notchime",
+    "artifactName": "Notchime-${version}-${arch}.${ext}",
+    "copyright": "© 2026 GAO TIANYU",
+    "asar": true,
     "directories": {
       "output": "dist.noindex",
       "buildResources": "build"
@@ -92,20 +92,20 @@
       "hardenedRuntime": true,
       "gatekeeperAssess": false,
       "entitlements": "build/entitlements.mac.plist",
-      "entitlementsInherit": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.electron-helper.plist",
       "darkModeSupport": true,
       "extendInfo": {
         "LSUIElement": true,
         "NSHighResolutionCapable": true,
-        "CFBundleDisplayName": "Calendar Notch Dev",
-        "NSCalendarsUsageDescription": "Calendar Notch 只读取系统日历，展示今天及未来 7 天的日程，不会创建、修改或删除日程。",
-        "NSCalendarsFullAccessUsageDescription": "Calendar Notch 只读取系统日历，展示今天及未来 7 天的日程，不会创建、修改或删除日程。",
+        "CFBundleDisplayName": "Notchime",
+        "NSCalendarsUsageDescription": "Notchime 只读取系统日历，展示今天及未来 7 天的日程，不会创建、修改或删除日程。",
+        "NSCalendarsFullAccessUsageDescription": "Notchime 只读取系统日历，展示今天及未来 7 天的日程，不会创建、修改或删除日程。",
         "NSRemindersUsageDescription": "展示今天及已逾期的 Apple Reminders 待办，仅在您主动点击时标记完成，不创建、编辑或删除事项。",
         "NSRemindersFullAccessUsageDescription": "展示今天及已逾期的 Apple Reminders 待办，仅在您主动点击时标记完成，不创建、编辑或删除事项。"
       }
     },
     "dmg": {
-      "title": "Calendar Notch Dev ${version}",
+      "title": "Notchime ${version}",
       "iconSize": 100,
       "contents": [
         {
@@ -126,8 +126,8 @@
     },
     "extraResources": [
       {
-        "from": ".cache/native/CalendarNotchCalendarHelper.app",
-        "to": "native/CalendarNotchCalendarHelper.app"
+        "from": ".cache/native/NotchimeEventKitHelper.app",
+        "to": "native/NotchimeEventKitHelper.app"
       },
       {
         "from": "node_modules/electron/dist/LICENSE",
@@ -156,5 +156,6 @@
       "name": "TO-DO Panel contributors",
       "url": "https://github.com/xiaopu-ai/TO-DO-Panel"
     }
-  ]
+  ],
+  "homepage": "https://github.com/GAO9228TIANYU/Notchime"
 }

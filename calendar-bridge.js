@@ -7,7 +7,7 @@ const MAX_REQUEST = 1024 * 1024;
 const MAX_PENDING = 64;
 function helperPath(app) {
   const resources = app.isPackaged ? process.resourcesPath : path.join(__dirname, '.cache');
-  return path.join(resources, 'native/CalendarNotchCalendarHelper.app/Contents/MacOS/calendar-helper');
+  return path.join(resources, 'native/NotchimeEventKitHelper.app/Contents/MacOS/notchime-eventkit-helper');
 }
 class CalendarBridge extends EventEmitter {
   constructor(executable, { spawnProcess = spawn, timeoutMs = 15000 } = {}) {

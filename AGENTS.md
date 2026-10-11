@@ -33,7 +33,7 @@
 
 ## 身份和执行限制
 
-- 用户可见品牌Notchime；app.setName、package name/version、appId/productName、Bundle ID、userData仍为Calendar Notch Dev独立开发身份。Phase5D才统一正式身份；不得提前迁移或触碰原版Dynamic Panel数据。
+- 正式身份Notchime 1.0.0、com.notchime.app；默认userData为Notchime。旧Calendar Notch Dev标识仅保留在显式离线导入工具/历史文档，不自动读取或迁移旧数据；不得触碰原版Dynamic Panel数据。
 - 用户已指定build/notchime-icon.png作为新图标；转换衍生ICNS不等于正式签名包图标已验证。发布前确认图片的再分发权利。
 - 不执行任何Git，不运行隐藏hooks，不创建仓库/分支/提交或自动发布。
 - 不修改真实Calendar、Reminders、Countdown或偏好；不清理.cache私人证据。

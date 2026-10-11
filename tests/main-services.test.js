@@ -1,4 +1,10 @@
 const test = require('node:test');
+test('blur cannot orphan an automatic reveal; manual/null sources still collapse outside authorization', () => {
+  const { shouldCollapseOnBlur } = require('../main-services');
+  assert.equal(shouldCollapseOnBlur({source:'automatic'}),false);
+  for(const source of ['manual',null])assert.equal(shouldCollapseOnBlur({source}),true);
+  for(const source of ['manual','automatic',null])assert.equal(shouldCollapseOnBlur({source,authorizationActive:true}),false);
+});
 const assert = require('node:assert/strict');
 const { installLocalWebContentsGuards, hoverSpacePollingPolicy, notificationTimerDelay } = require('../main-services');
 
