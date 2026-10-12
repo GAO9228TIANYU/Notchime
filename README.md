@@ -97,7 +97,7 @@ Read the [privacy notice](docs/PRIVACY.md) for data fields, local storage, permi
 
 ### Download Notchime 1.0.0 — test Release Candidate
 
-**[Download the Apple Silicon DMG from Google Drive](https://drive.google.com/file/d/1JIidJ8UssXWtGOK3YWHOgUAH_S-Ndok2/view?usp=sharing)**
+**[Download the Apple Silicon DMG from Google Drive](https://drive.google.com/file/d/1eGPOB2yiZie7LjQh0y3uF2-MQZysH9Tq/view?usp=sharing)**
 
 Package: **`Notchime-1.0.0-arm64.dmg`** · approximately **125 MB** · macOS **13+**, **Apple Silicon**. macOS 13/14 device behavior has not yet been verified; Intel Macs are not supported by this package.
 
